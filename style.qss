@@ -6,6 +6,55 @@
     color: #ffffff;
 }
 
+/* Menu Bar */
+QMenuBar {
+    background-color: #1a1a1a;
+    color: #888888;
+    border: none;
+    padding: 2px;
+}
+
+QMenuBar::item {
+    background-color: transparent;
+    padding: 4px 8px;
+}
+
+QMenuBar::item:selected {
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+QMenuBar::item:pressed {
+    background-color: #0066FF;
+    color: #ffffff;
+}
+
+/* Menu Dropdowns */
+QMenu {
+    background-color: #1a1a1a;
+    color: #888888;
+    border: 1px solid #2a2a2a;
+}
+
+QMenu::item {
+    padding: 6px 30px;
+}
+
+QMenu::item:selected {
+    background-color: #0066FF;
+    color: #ffffff;
+}
+
+QMenu::item:disabled {
+    color: #444444;
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: #2a2a2a;
+    margin: 4px 0px;
+}
+
 /* Top Bar */
 #TopBar {
     background-color: #000000;
@@ -423,6 +472,13 @@ QTreeView::branch:selected {
     font-weight: bold;
     letter-spacing: 1px;
     padding: 3px;
+}
+
+#MixerValueLabel {
+    background-color: #000000;
+    color: #888888;
+    font-size: 9px;
+    padding: 2px;
 }
 
 #KnobValue {

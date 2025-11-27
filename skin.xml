@@ -778,22 +778,30 @@
           <SizePolicy>me,me</SizePolicy>
           <Children>
 
+            <!-- Left Spacer -->
+            <WidgetGroup>
+              <SizePolicy>min,me</SizePolicy>
+              <MinimumSize>20,-1</MinimumSize>
+            </WidgetGroup>
+
             <!-- TEMPO A (Far Left) -->
             <WidgetGroup>
               <Layout>vertical</Layout>
               <SizePolicy>min,me</SizePolicy>
-              <MinimumSize>90,-1</MinimumSize>
+              <MinimumSize>60,-1</MinimumSize>
+              <MaximumSize>60,-1</MaximumSize>
               <Children>
                 <Label>
                   <ObjectName>MixerKnobLabel</ObjectName>
                   <Text>TEMPO A</Text>
                   <Alignment>center</Alignment>
                   <MinimumSize>-1,20</MinimumSize>
+                  <SizePolicy>f,min</SizePolicy>
                 </Label>
                 <SliderComposed>
                   <ObjectName>TempoFaderDeck1</ObjectName>
                   <Horizontal>false</Horizontal>
-                  <Size>80,450</Size>
+                  <Size>60,450</Size>
                   <Slider>skin:images/fader_background_tempo.svg</Slider>
                   <Handle>skin:images/fader_handle.svg</Handle>
                   <Connection>
@@ -937,7 +945,7 @@
                         <SliderComposed>
                           <ObjectName>VolumeFaderDeck1</ObjectName>
                           <Horizontal>false</Horizontal>
-                          <Size>80,420</Size>
+                          <Size>60,420</Size>
                           <Slider>skin:images/fader_background.svg</Slider>
                           <Handle>skin:images/fader_handle.svg</Handle>
                           <Connection>
@@ -962,7 +970,7 @@
                         <SliderComposed>
                           <ObjectName>VolumeFaderDeck2</ObjectName>
                           <Horizontal>false</Horizontal>
-                          <Size>80,420</Size>
+                          <Size>60,420</Size>
                           <Slider>skin:images/fader_background.svg</Slider>
                           <Handle>skin:images/fader_handle.svg</Handle>
                           <Connection>
@@ -977,20 +985,21 @@
 
                 <!-- Crossfader Below -->
                 <WidgetGroup>
-                  <Layout>vertical</Layout>
+                  <Layout>horizontal</Layout>
                   <SizePolicy>me,min</SizePolicy>
-                  <MinimumSize>-1,80</MinimumSize>
+                  <MinimumSize>-1,40</MinimumSize>
                   <Children>
                     <Label>
                       <ObjectName>MixerKnobLabel</ObjectName>
                       <Text>X-FADE</Text>
-                      <Alignment>center</Alignment>
-                      <MinimumSize>-1,20</MinimumSize>
+                      <Alignment>left</Alignment>
+                      <MinimumSize>60,-1</MinimumSize>
+                      <SizePolicy>min,min</SizePolicy>
                     </Label>
                     <SliderComposed>
                       <ObjectName>Crossfader</ObjectName>
                       <Horizontal>true</Horizontal>
-                      <Size>200,80</Size>
+                      <Size>200,24</Size>
                       <Slider>skin:images/crossfader_background.svg</Slider>
                       <Handle>skin:images/crossfader_handle.svg</Handle>
                       <Connection>
@@ -1113,18 +1122,20 @@
             <WidgetGroup>
               <Layout>vertical</Layout>
               <SizePolicy>min,me</SizePolicy>
-              <MinimumSize>90,-1</MinimumSize>
+              <MinimumSize>60,-1</MinimumSize>
+              <MaximumSize>60,-1</MaximumSize>
               <Children>
                 <Label>
                   <ObjectName>MixerKnobLabel</ObjectName>
                   <Text>TEMPO B</Text>
                   <Alignment>center</Alignment>
                   <MinimumSize>-1,20</MinimumSize>
+                  <SizePolicy>f,min</SizePolicy>
                 </Label>
                 <SliderComposed>
                   <ObjectName>TempoFaderDeck2</ObjectName>
                   <Horizontal>false</Horizontal>
-                  <Size>80,450</Size>
+                  <Size>60,450</Size>
                   <Slider>skin:images/fader_background_tempo.svg</Slider>
                   <Handle>skin:images/fader_handle.svg</Handle>
                   <Connection>
@@ -1132,6 +1143,12 @@
                   </Connection>
                 </SliderComposed>
               </Children>
+            </WidgetGroup>
+
+            <!-- Right Spacer -->
+            <WidgetGroup>
+              <SizePolicy>min,me</SizePolicy>
+              <MinimumSize>20,-1</MinimumSize>
             </WidgetGroup>
 
           </Children>
