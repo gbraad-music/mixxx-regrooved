@@ -10,6 +10,10 @@
       <attribute config_key="[App],num_samplers">8</attribute>
       <attribute persist="true" config_key="[Tab],current">overview</attribute>
       <attribute persist="true" config_key="[Master],show_extended_controls">0</attribute>
+      <attribute persist="true" config_key="[Master],show_single_deck">0</attribute>
+      <attribute persist="true" config_key="[Deck],current_deck">1</attribute>
+      <attribute config_key="[Deck],show_deck_a">1</attribute>
+      <attribute config_key="[Deck],show_deck_b">0</attribute>
     </attributes>
   </manifest>
 
@@ -39,6 +43,26 @@
 
         <WidgetGroup><SizePolicy>me,min</SizePolicy></WidgetGroup>
 
+        <!-- Single/Dual Deck Toggle -->
+        <PushButton>
+          <ObjectName>ToggleDeckModeButton</ObjectName>
+          <Size>80,30</Size>
+          <NumberStates>2</NumberStates>
+          <State>
+            <Number>0</Number>
+            <Text>2 DECKS</Text>
+          </State>
+          <State>
+            <Number>1</Number>
+            <Text>1 DECK</Text>
+          </State>
+          <Connection>
+            <ConfigKey>[Master],show_single_deck</ConfigKey>
+            <EmitOnDownPress>true</EmitOnDownPress>
+            <ButtonState>LeftButton</ButtonState>
+          </Connection>
+        </PushButton>
+
         <!-- Extended Controls Toggle -->
         <PushButton>
           <ObjectName>ToggleExtendedButton</ObjectName>
@@ -59,24 +83,92 @@
           </Connection>
         </PushButton>
 
-        <!-- View Tab Buttons -->
+        <!-- Deck A+B Button (visible in dual deck mode) -->
         <PushButton>
-          <ObjectName>ShowOverviewButton</ObjectName>
+          <ObjectName>ShowBothDecksButton</ObjectName>
+          <Size>90,30</Size>
+          <NumberStates>2</NumberStates>
+          <State>
+            <Number>0</Number>
+            <Text>DECK A+B</Text>
+          </State>
+          <State>
+            <Number>1</Number>
+            <Text>DECK A+B</Text>
+          </State>
+          <Connection>
+            <ConfigKey>[Tab],overview</ConfigKey>
+            <BindProperty>value</BindProperty>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Tab],overview</ConfigKey>
+            <ButtonState>LeftButton</ButtonState>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Master],show_single_deck</ConfigKey>
+            <BindProperty>visible</BindProperty>
+            <Transform><Not/></Transform>
+          </Connection>
+        </PushButton>
+
+        <!-- Deck A Button (visible only in single deck mode) -->
+        <PushButton>
+          <ObjectName>ShowDeckAButton</ObjectName>
           <Size>80,30</Size>
           <NumberStates>2</NumberStates>
           <State>
             <Number>0</Number>
-            <Text>OVERVIEW</Text>
+            <Text>DECK A</Text>
           </State>
           <State>
             <Number>1</Number>
-            <Text>OVERVIEW</Text>
+            <Text>DECK A</Text>
           </State>
           <Connection>
-            <ConfigKey>[Tab],overview</ConfigKey>
+            <ConfigKey>[Deck],current_deck</ConfigKey>
+            <BindProperty>value</BindProperty>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Deck],deck_a</ConfigKey>
+            <EmitOnDownPress>true</EmitOnDownPress>
+            <ButtonState>LeftButton</ButtonState>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Master],show_single_deck</ConfigKey>
+            <BindProperty>visible</BindProperty>
           </Connection>
         </PushButton>
 
+        <!-- Deck B Button (visible only in single deck mode) -->
+        <PushButton>
+          <ObjectName>ShowDeckBButton</ObjectName>
+          <Size>80,30</Size>
+          <NumberStates>2</NumberStates>
+          <State>
+            <Number>0</Number>
+            <Text>DECK B</Text>
+          </State>
+          <State>
+            <Number>1</Number>
+            <Text>DECK B</Text>
+          </State>
+          <Connection>
+            <ConfigKey>[Deck],current_deck</ConfigKey>
+            <BindProperty>value</BindProperty>
+            <Transform><Not/></Transform>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Deck],deck_b</ConfigKey>
+            <EmitOnDownPress>true</EmitOnDownPress>
+            <ButtonState>LeftButton</ButtonState>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Master],show_single_deck</ConfigKey>
+            <BindProperty>visible</BindProperty>
+          </Connection>
+        </PushButton>
+
+        <!-- Library Button -->
         <PushButton>
           <ObjectName>ShowLibraryButton</ObjectName>
           <Size>80,30</Size>
@@ -89,6 +181,10 @@
             <Number>1</Number>
             <Text>LIBRARY</Text>
           </State>
+          <Connection>
+            <ConfigKey>[Tab],library</ConfigKey>
+            <BindProperty>value</BindProperty>
+          </Connection>
           <Connection>
             <ConfigKey>[Tab],library</ConfigKey>
           </Connection>
@@ -109,899 +205,112 @@
           <SizePolicy>me,me</SizePolicy>
           <Children>
 
-            <!-- Deck A Row -->
+            <!-- Dual Deck View (visible when show_single_deck=0) -->
             <WidgetGroup>
-              <ObjectName>DeckARow</ObjectName>
-              <Layout>horizontal</Layout>
+              <Layout>vertical</Layout>
               <SizePolicy>me,me</SizePolicy>
-              <MinimumSize>-1,200</MinimumSize>
+              <Connection>
+                <ConfigKey>[Master],show_single_deck</ConfigKey>
+                <BindProperty>visible</BindProperty>
+                <Transform><Not/></Transform>
+              </Connection>
               <Children>
 
-                <!-- Transport Buttons (Left) -->
+                <!-- Deck A Row -->
+                <Template src="skin:deck.xml">
+                  <SetVariable name="DeckNum">1</SetVariable>
+                  <SetVariable name="DeckLetter">A</SetVariable>
+                  <SetVariable name="SignalColor">#4080FF</SetVariable>
+                  <SetVariable name="SignalLowColor">#0040A0</SetVariable>
+                  <SetVariable name="SignalHighColor">#80C0FF</SetVariable>
+                </Template>
+
+                <!-- Crossfader (between decks, visible when expanded) -->
                 <WidgetGroup>
-                  <ObjectName>DeckAControls</ObjectName>
-                  <Layout>vertical</Layout>
-                  <SizePolicy>min,me</SizePolicy>
-                  <Children>
-
-                    <!-- Big Play Button (visible when collapsed) -->
-                    <WidgetGroup>
-                      <SizePolicy>min,min</SizePolicy>
-                      <MinimumSize>140,140</MinimumSize>
-                      <Connection>
-                        <ConfigKey>[Master],show_extended_controls</ConfigKey>
-                        <BindProperty>visible</BindProperty>
-                        <Transform><Not/></Transform>
-                      </Connection>
-                      <Children>
-                        <PushButton>
-                          <ObjectName>PlayButtonDeck1</ObjectName>
-                          <Size>130,130</Size>
-                          <NumberStates>2</NumberStates>
-                          <State>
-                            <Number>0</Number>
-                            <Text>PLAY</Text>
-                          </State>
-                          <State>
-                            <Number>1</Number>
-                            <Text>PLAY</Text>
-                          </State>
-                          <Connection>
-                            <ConfigKey>[Channel1],play</ConfigKey>
-                            <ButtonState>LeftButton</ButtonState>
-                          </Connection>
-                        </PushButton>
-                      </Children>
-                    </WidgetGroup>
-
-                    <!-- Small Transport Controls 2x2 Grid (visible when expanded) -->
-                    <WidgetGroup>
-                      <Layout>vertical</Layout>
-                      <SizePolicy>min,me</SizePolicy>
-                      <MinimumSize>130,-1</MinimumSize>
-                      <Connection>
-                        <ConfigKey>[Master],show_extended_controls</ConfigKey>
-                        <BindProperty>visible</BindProperty>
-                      </Connection>
-                      <Children>
-                        <!-- Row 1: CUE, PLAY -->
-                        <WidgetGroup>
-                          <Layout>horizontal</Layout>
-                          <SizePolicy>min,min</SizePolicy>
-                          <Children>
-                            <PushButton>
-                              <ObjectName>CueButtonDeck1</ObjectName>
-                              <Size>60,60</Size>
-                              <NumberStates>1</NumberStates>
-                              <State>
-                                <Number>0</Number>
-                                <Text>CUE</Text>
-                              </State>
-                              <Connection>
-                                <ConfigKey>[Channel1],cue_default</ConfigKey>
-                                <ButtonState>LeftButton</ButtonState>
-                              </Connection>
-                            </PushButton>
-                            <PushButton>
-                              <ObjectName>PlayButtonDeck1Small</ObjectName>
-                              <Size>60,60</Size>
-                              <NumberStates>2</NumberStates>
-                              <State>
-                                <Number>0</Number>
-                                <Text>PLAY</Text>
-                              </State>
-                              <State>
-                                <Number>1</Number>
-                                <Text>PLAY</Text>
-                              </State>
-                              <Connection>
-                                <ConfigKey>[Channel1],play</ConfigKey>
-                                <ButtonState>LeftButton</ButtonState>
-                              </Connection>
-                            </PushButton>
-                          </Children>
-                        </WidgetGroup>
-                        <!-- Row 2: SYNC, LOOP -->
-                        <WidgetGroup>
-                          <Layout>horizontal</Layout>
-                          <SizePolicy>min,min</SizePolicy>
-                          <Children>
-                            <PushButton>
-                              <ObjectName>SyncButtonDeck1</ObjectName>
-                              <Size>60,60</Size>
-                              <NumberStates>2</NumberStates>
-                              <State>
-                                <Number>0</Number>
-                                <Text>SYNC</Text>
-                              </State>
-                              <State>
-                                <Number>1</Number>
-                                <Text>SYNC</Text>
-                              </State>
-                              <Connection>
-                                <ConfigKey>[Channel1],sync_enabled</ConfigKey>
-                                <ButtonState>LeftButton</ButtonState>
-                              </Connection>
-                            </PushButton>
-                            <PushButton>
-                              <ObjectName>LoopButtonDeck1</ObjectName>
-                              <Size>60,60</Size>
-                              <NumberStates>2</NumberStates>
-                              <State>
-                                <Number>0</Number>
-                                <Text>LOOP</Text>
-                              </State>
-                              <State>
-                                <Number>1</Number>
-                                <Text>LOOP</Text>
-                              </State>
-                              <Connection>
-                                <ConfigKey>[Channel1],beatloop_4_enabled</ConfigKey>
-                              </Connection>
-                              <Connection>
-                                <ConfigKey>[Channel1],beatloop_4_toggle</ConfigKey>
-                                <EmitOnPressAndRelease>true</EmitOnPressAndRelease>
-                                <ButtonState>LeftButton</ButtonState>
-                              </Connection>
-                            </PushButton>
-                          </Children>
-                        </WidgetGroup>
-                      </Children>
-                    </WidgetGroup>
-
-                  </Children>
-                </WidgetGroup>
-
-                <!-- Waveform (Center) -->
-                <WidgetGroup>
-                  <ObjectName>Deck1WaveformContainer</ObjectName>
-                  <Layout>vertical</Layout>
-                  <SizePolicy>me,me</SizePolicy>
-                  <Children>
-
-                    <WidgetGroup>
-                      <ObjectName>DeckLabelGroup</ObjectName>
-                      <Layout>horizontal</Layout>
-                      <SizePolicy>me,min</SizePolicy>
-                      <MinimumSize>-1,25</MinimumSize>
-                      <MaximumSize>-1,25</MaximumSize>
-                      <Children>
-                        <Label>
-                          <ObjectName>DeckLabel</ObjectName>
-                          <Text>DECK A</Text>
-                          <Alignment>left</Alignment>
-                          <SizePolicy>min,min</SizePolicy>
-                        </Label>
-                        <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>10,-1</MinimumSize></WidgetGroup>
-                        <TrackProperty>
-                          <ObjectName>DeckLabel</ObjectName>
-                          <Property>title</Property>
-                          <Channel>1</Channel>
-                          <SizePolicy>me,min</SizePolicy>
-                          <Alignment>left</Alignment>
-                        </TrackProperty>
-                        <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>10,-1</MinimumSize></WidgetGroup>
-                        <NumberBpm>
-                          <ObjectName>DeckLabel</ObjectName>
-                          <Channel>1</Channel>
-                          <SizePolicy>min,min</SizePolicy>
-                          <Alignment>left</Alignment>
-                          <Connection>
-                            <ConfigKey>[Channel1],visual_bpm</ConfigKey>
-                          </Connection>
-                        </NumberBpm>
-                        <Label>
-                          <ObjectName>DeckLabel</ObjectName>
-                          <Text> BPM</Text>
-                          <Alignment>left</Alignment>
-                          <SizePolicy>min,min</SizePolicy>
-                        </Label>
-                        <WidgetGroup><SizePolicy>me,min</SizePolicy></WidgetGroup>
-                      </Children>
-                    </WidgetGroup>
-
-                    <Overview>
-                      <ObjectName>OverviewDeck1</ObjectName>
-                      <Channel>1</Channel>
-                      <SizePolicy>me,min</SizePolicy>
-                      <MinimumSize>-1,60</MinimumSize>
-                      <MaximumSize>-1,60</MaximumSize>
-                      <BgColor>#000000</BgColor>
-                      <SignalColor>#4080FF</SignalColor>
-                      <SignalLowColor>#0040A0</SignalLowColor>
-                      <SignalMidColor>#4080FF</SignalMidColor>
-                      <SignalHighColor>#80C0FF</SignalHighColor>
-                      <PlayPosColor>#00FF00</PlayPosColor>
-                      <MarkerColor>#FF0000</MarkerColor>
-                      <Mark>
-                        <Control>loop_start_position</Control>
-                        <Color>#FFEE00</Color>
-                        <Align>bottom</Align>
-                      </Mark>
-                      <Mark>
-                        <Control>loop_end_position</Control>
-                        <Color>#FFEE00</Color>
-                        <Align>bottom</Align>
-                      </Mark>
-                      <MarkRange>
-                        <StartControl>loop_start_position</StartControl>
-                        <EndControl>loop_end_position</EndControl>
-                        <EnabledControl>loop_enabled</EnabledControl>
-                        <Color>#FFEE0080</Color>
-                      </MarkRange>
-                    </Overview>
-
-                    <Visual>
-                      <ObjectName>WaveformDeck1</ObjectName>
-                      <Channel>1</Channel>
-                      <SizePolicy>me,me</SizePolicy>
-                      <BgColor>#000000</BgColor>
-                      <SignalColor>#4080FF</SignalColor>
-                      <SignalLowColor>#0040A0</SignalLowColor>
-                      <SignalMidColor>#4080FF</SignalMidColor>
-                      <SignalHighColor>#80C0FF</SignalHighColor>
-                      <BeatColor>#FFFFFF</BeatColor>
-                      <PlayPosColor>#00FF00</PlayPosColor>
-                      <AxesColor>#333333</AxesColor>
-                      <MarkerColor>#FF0000</MarkerColor>
-                      <Mark>
-                        <Control>loop_start_position</Control>
-                        <Color>#FFEE00</Color>
-                        <Align>bottom</Align>
-                      </Mark>
-                      <Mark>
-                        <Control>loop_end_position</Control>
-                        <Color>#FFEE00</Color>
-                        <Align>bottom</Align>
-                      </Mark>
-                      <MarkRange>
-                        <StartControl>loop_start_position</StartControl>
-                        <EndControl>loop_end_position</EndControl>
-                        <EnabledControl>loop_enabled</EnabledControl>
-                        <Color>#FFEE0080</Color>
-                      </MarkRange>
-                    </Visual>
-
-                  </Children>
-                </WidgetGroup>
-
-                <!-- Mixer Controls (Right - visible when expanded) -->
-                <WidgetGroup>
-                  <ObjectName>Deck1MixerControls</ObjectName>
+                  <ObjectName>CrossfaderSection</ObjectName>
                   <Layout>horizontal</Layout>
-                  <SizePolicy>min,me</SizePolicy>
-                  <MaximumSize>280,-1</MaximumSize>
+                  <SizePolicy>me,min</SizePolicy>
+                  <MinimumSize>-1,35</MinimumSize>
                   <Connection>
                     <ConfigKey>[Master],show_extended_controls</ConfigKey>
                     <BindProperty>visible</BindProperty>
                   </Connection>
                   <Children>
-
-                    <!-- Left Spacing -->
-                    <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>10,-1</MinimumSize></WidgetGroup>
-
-                    <!-- EQ Knobs (Vertical Stack) -->
-                    <WidgetGroup>
-                      <Layout>vertical</Layout>
-                      <SizePolicy>min,me</SizePolicy>
-                      <Children>
-
-                        <!-- HIGH A -->
-                        <WidgetGroup>
-                          <Layout>vertical</Layout>
-                          <SizePolicy>me,me</SizePolicy>
-                          <Children>
-                            <Label>
-                              <ObjectName>MixerKnobLabel</ObjectName>
-                              <Text>HIGH</Text>
-                              <Alignment>center</Alignment>
-                              <MinimumSize>-1,15</MinimumSize>
-                            </Label>
-                            <Knob>
-                              <ObjectName>HighKnobDeck1</ObjectName>
-                              <TooltipId>filter_high</TooltipId>
-                              <Size>54,54</Size>
-                              <NumberStates>64</NumberStates>
-                              <Path>skin:images/knob%1.png</Path>
-                              <Connection>
-                                <ConfigKey>[EqualizerRack1_[Channel1]_Effect1],parameter3</ConfigKey>
-                              </Connection>
-                            </Knob>
-                          </Children>
-                        </WidgetGroup>
-
-                        <!-- Spacing -->
-                        <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>-1,5</MinimumSize></WidgetGroup>
-
-                        <!-- MID A -->
-                        <WidgetGroup>
-                          <Layout>vertical</Layout>
-                          <SizePolicy>me,me</SizePolicy>
-                          <Children>
-                            <Label>
-                              <ObjectName>MixerKnobLabel</ObjectName>
-                              <Text>MID</Text>
-                              <Alignment>center</Alignment>
-                              <MinimumSize>-1,15</MinimumSize>
-                            </Label>
-                            <Knob>
-                              <ObjectName>MidKnobDeck1</ObjectName>
-                              <TooltipId>filter_mid</TooltipId>
-                              <Size>54,54</Size>
-                              <NumberStates>64</NumberStates>
-                              <Path>skin:images/knob%1.png</Path>
-                              <Connection>
-                                <ConfigKey>[EqualizerRack1_[Channel1]_Effect1],parameter2</ConfigKey>
-                              </Connection>
-                            </Knob>
-                          </Children>
-                        </WidgetGroup>
-
-                        <!-- Spacing -->
-                        <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>-1,5</MinimumSize></WidgetGroup>
-
-                        <!-- LOW A -->
-                        <WidgetGroup>
-                          <Layout>vertical</Layout>
-                          <SizePolicy>me,me</SizePolicy>
-                          <Children>
-                            <Label>
-                              <ObjectName>MixerKnobLabel</ObjectName>
-                              <Text>LOW</Text>
-                              <Alignment>center</Alignment>
-                              <MinimumSize>-1,15</MinimumSize>
-                            </Label>
-                            <Knob>
-                              <ObjectName>LowKnobDeck1</ObjectName>
-                              <TooltipId>filter_low</TooltipId>
-                              <Size>54,54</Size>
-                              <NumberStates>64</NumberStates>
-                              <Path>skin:images/knob%1.png</Path>
-                              <Connection>
-                                <ConfigKey>[EqualizerRack1_[Channel1]_Effect1],parameter1</ConfigKey>
-                              </Connection>
-                            </Knob>
-                          </Children>
-                        </WidgetGroup>
-
-                      </Children>
-                    </WidgetGroup>
-
-                    <!-- Spacing -->
-                    <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>10,-1</MinimumSize></WidgetGroup>
-
-                    <!-- Faders Horizontal -->
-                    <WidgetGroup>
-                      <Layout>horizontal</Layout>
-                      <SizePolicy>min,me</SizePolicy>
-                      <Children>
-                        <!-- TEMPO A Fader -->
-                        <WidgetGroup>
-                          <Layout>vertical</Layout>
-                          <SizePolicy>me,me</SizePolicy>
-                          <Children>
-                            <Label>
-                              <ObjectName>MixerKnobLabel</ObjectName>
-                              <Text>TEMPO</Text>
-                              <Alignment>center</Alignment>
-                              <MinimumSize>-1,15</MinimumSize>
-                            </Label>
-                            <SliderComposed>
-                              <ObjectName>TempoFaderDeck1</ObjectName>
-                              <Horizontal>false</Horizontal>
-                              <Size>40,90</Size>
-                              <MaximumSize>-1,236</MaximumSize>
-                              <Slider>skin:images/fader_background.svg</Slider>
-                              <Handle>skin:images/fader_handle.svg</Handle>
-                              <Connection>
-                                <ConfigKey>[Channel1],rate</ConfigKey>
-                              </Connection>
-                            </SliderComposed>
-                          </Children>
-                        </WidgetGroup>
-
-                        <!-- Spacing -->
-                        <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>5,-1</MinimumSize></WidgetGroup>
-
-                        <!-- VOLUME A Fader -->
-                        <WidgetGroup>
-                          <Layout>vertical</Layout>
-                          <SizePolicy>me,me</SizePolicy>
-                          <Children>
-                            <Label>
-                              <ObjectName>MixerKnobLabel</ObjectName>
-                              <Text>VOL A</Text>
-                              <Alignment>center</Alignment>
-                              <MinimumSize>-1,15</MinimumSize>
-                            </Label>
-                            <SliderComposed>
-                              <ObjectName>VolumeFaderDeck1</ObjectName>
-                              <Horizontal>false</Horizontal>
-                              <Size>40,90</Size>
-                              <MaximumSize>-1,236</MaximumSize>
-                              <Slider>skin:images/fader_background.svg</Slider>
-                              <Handle>skin:images/fader_handle.svg</Handle>
-                              <Connection>
-                                <ConfigKey>[Channel1],volume</ConfigKey>
-                              </Connection>
-                            </SliderComposed>
-                          </Children>
-                        </WidgetGroup>
-                      </Children>
-                    </WidgetGroup>
-
-                    <!-- Right Spacing -->
-                    <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>10,-1</MinimumSize></WidgetGroup>
-
+                    <WidgetGroup><SizePolicy>me,min</SizePolicy></WidgetGroup>
+                    <Label>
+                      <ObjectName>MixerKnobLabel</ObjectName>
+                      <Text>X-FADE</Text>
+                      <Alignment>right</Alignment>
+                      <MinimumSize>60,-1</MinimumSize>
+                      <SizePolicy>min,min</SizePolicy>
+                    </Label>
+                    <SliderComposed>
+                      <ObjectName>Crossfader</ObjectName>
+                      <Horizontal>true</Horizontal>
+                      <Size>200,24</Size>
+                      <Slider>skin:images/crossfader_background.svg</Slider>
+                      <Handle>skin:images/crossfader_handle.svg</Handle>
+                      <Connection>
+                        <ConfigKey>[Master],crossfader</ConfigKey>
+                      </Connection>
+                    </SliderComposed>
+                    <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>20,-1</MinimumSize></WidgetGroup>
                   </Children>
                 </WidgetGroup>
+
+                <!-- Deck B Row -->
+                <Template src="skin:deck.xml">
+                  <SetVariable name="DeckNum">2</SetVariable>
+                  <SetVariable name="DeckLetter">B</SetVariable>
+                  <SetVariable name="SignalColor">#FF4080</SetVariable>
+                  <SetVariable name="SignalLowColor">#A00040</SetVariable>
+                  <SetVariable name="SignalHighColor">#FF80C0</SetVariable>
+                </Template>
 
               </Children>
             </WidgetGroup>
 
-            <!-- Crossfader (between decks, visible when expanded) -->
-            <WidgetGroup>
-              <ObjectName>CrossfaderSection</ObjectName>
-              <Layout>horizontal</Layout>
-              <SizePolicy>me,min</SizePolicy>
-              <MinimumSize>-1,35</MinimumSize>
+            <!-- Single Deck View (visible when show_single_deck=1) -->
+            <WidgetStack currentpage="[Deck],current_deck">
+              <SizePolicy>me,me</SizePolicy>
               <Connection>
-                <ConfigKey>[Master],show_extended_controls</ConfigKey>
+                <ConfigKey>[Master],show_single_deck</ConfigKey>
                 <BindProperty>visible</BindProperty>
               </Connection>
               <Children>
-                <WidgetGroup><SizePolicy>me,min</SizePolicy></WidgetGroup>
-                <Label>
-                  <ObjectName>MixerKnobLabel</ObjectName>
-                  <Text>X-FADE</Text>
-                  <Alignment>right</Alignment>
-                  <MinimumSize>60,-1</MinimumSize>
-                  <SizePolicy>min,min</SizePolicy>
-                </Label>
-                <SliderComposed>
-                  <ObjectName>Crossfader</ObjectName>
-                  <Horizontal>true</Horizontal>
-                  <Size>200,24</Size>
-                  <Slider>skin:images/crossfader_background.svg</Slider>
-                  <Handle>skin:images/crossfader_handle.svg</Handle>
-                  <Connection>
-                    <ConfigKey>[Master],crossfader</ConfigKey>
-                  </Connection>
-                </SliderComposed>
-                <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>20,-1</MinimumSize></WidgetGroup>
-              </Children>
-            </WidgetGroup>
 
-            <!-- Deck B Row -->
-            <WidgetGroup>
-              <ObjectName>DeckBRow</ObjectName>
-              <Layout>horizontal</Layout>
-              <SizePolicy>me,me</SizePolicy>
-              <MinimumSize>-1,200</MinimumSize>
-              <Children>
-
-                <!-- Transport Buttons (Left) -->
-                <WidgetGroup>
-                  <ObjectName>DeckBControls</ObjectName>
-                  <Layout>vertical</Layout>
-                  <SizePolicy>min,me</SizePolicy>
-                  <MinimumSize>140,-1</MinimumSize>
-                  <Children>
-
-                    <!-- Big Play Button (visible when collapsed) -->
-                    <WidgetGroup>
-                      <SizePolicy>min,min</SizePolicy>
-                      <MinimumSize>140,140</MinimumSize>
-                      <Connection>
-                        <ConfigKey>[Master],show_extended_controls</ConfigKey>
-                        <BindProperty>visible</BindProperty>
-                        <Transform><Not/></Transform>
-                      </Connection>
-                      <Children>
-                        <PushButton>
-                          <ObjectName>PlayButtonDeck2</ObjectName>
-                          <Size>130,130</Size>
-                          <NumberStates>2</NumberStates>
-                          <State>
-                            <Number>0</Number>
-                            <Text>PLAY</Text>
-                          </State>
-                          <State>
-                            <Number>1</Number>
-                            <Text>PLAY</Text>
-                          </State>
-                          <Connection>
-                            <ConfigKey>[Channel2],play</ConfigKey>
-                            <ButtonState>LeftButton</ButtonState>
-                          </Connection>
-                        </PushButton>
-                      </Children>
-                    </WidgetGroup>
-
-                    <!-- Small Transport Controls 2x2 Grid (visible when expanded) -->
-                    <WidgetGroup>
-                      <Layout>vertical</Layout>
-                      <SizePolicy>min,me</SizePolicy>
-                      <MinimumSize>130,-1</MinimumSize>
-                      <Connection>
-                        <ConfigKey>[Master],show_extended_controls</ConfigKey>
-                        <BindProperty>visible</BindProperty>
-                      </Connection>
-                      <Children>
-                        <!-- Row 1: CUE, PLAY -->
-                        <WidgetGroup>
-                          <Layout>horizontal</Layout>
-                          <SizePolicy>min,min</SizePolicy>
-                          <Children>
-                            <PushButton>
-                              <ObjectName>CueButtonDeck2</ObjectName>
-                              <Size>60,60</Size>
-                              <NumberStates>1</NumberStates>
-                              <State>
-                                <Number>0</Number>
-                                <Text>CUE</Text>
-                              </State>
-                              <Connection>
-                                <ConfigKey>[Channel2],cue_default</ConfigKey>
-                                <ButtonState>LeftButton</ButtonState>
-                              </Connection>
-                            </PushButton>
-                            <PushButton>
-                              <ObjectName>PlayButtonDeck2Small</ObjectName>
-                              <Size>60,60</Size>
-                              <NumberStates>2</NumberStates>
-                              <State>
-                                <Number>0</Number>
-                                <Text>PLAY</Text>
-                              </State>
-                              <State>
-                                <Number>1</Number>
-                                <Text>PLAY</Text>
-                              </State>
-                              <Connection>
-                                <ConfigKey>[Channel2],play</ConfigKey>
-                                <ButtonState>LeftButton</ButtonState>
-                              </Connection>
-                            </PushButton>
-                          </Children>
-                        </WidgetGroup>
-                        <!-- Row 2: SYNC, LOOP -->
-                        <WidgetGroup>
-                          <Layout>horizontal</Layout>
-                          <SizePolicy>min,min</SizePolicy>
-                          <Children>
-                            <PushButton>
-                              <ObjectName>SyncButtonDeck2</ObjectName>
-                              <Size>60,60</Size>
-                              <NumberStates>2</NumberStates>
-                              <State>
-                                <Number>0</Number>
-                                <Text>SYNC</Text>
-                              </State>
-                              <State>
-                                <Number>1</Number>
-                                <Text>SYNC</Text>
-                              </State>
-                              <Connection>
-                                <ConfigKey>[Channel2],sync_enabled</ConfigKey>
-                                <ButtonState>LeftButton</ButtonState>
-                              </Connection>
-                            </PushButton>
-                            <PushButton>
-                              <ObjectName>LoopButtonDeck2</ObjectName>
-                              <Size>60,60</Size>
-                              <NumberStates>2</NumberStates>
-                              <State>
-                                <Number>0</Number>
-                                <Text>LOOP</Text>
-                              </State>
-                              <State>
-                                <Number>1</Number>
-                                <Text>LOOP</Text>
-                              </State>
-                              <Connection>
-                                <ConfigKey>[Channel2],beatloop_4_enabled</ConfigKey>
-                              </Connection>
-                              <Connection>
-                                <ConfigKey>[Channel2],beatloop_4_toggle</ConfigKey>
-                                <EmitOnPressAndRelease>true</EmitOnPressAndRelease>
-                                <ButtonState>LeftButton</ButtonState>
-                              </Connection>
-                            </PushButton>
-                          </Children>
-                        </WidgetGroup>
-                      </Children>
-                    </WidgetGroup>
-
-                  </Children>
-                </WidgetGroup>
-
-                <!-- Waveform (Center) -->
-                <WidgetGroup>
-                  <ObjectName>Deck2WaveformContainer</ObjectName>
+                <!-- Deck A (trigger=1) -->
+                <WidgetGroup trigger="[Deck],deck_a">
                   <Layout>vertical</Layout>
                   <SizePolicy>me,me</SizePolicy>
                   <Children>
-
-                    <WidgetGroup>
-                      <ObjectName>DeckLabelGroup</ObjectName>
-                      <Layout>horizontal</Layout>
-                      <SizePolicy>me,min</SizePolicy>
-                      <MinimumSize>-1,25</MinimumSize>
-                      <MaximumSize>-1,25</MaximumSize>
-                      <Children>
-                        <Label>
-                          <ObjectName>DeckLabel</ObjectName>
-                          <Text>DECK B</Text>
-                          <Alignment>left</Alignment>
-                          <SizePolicy>min,min</SizePolicy>
-                        </Label>
-                        <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>10,-1</MinimumSize></WidgetGroup>
-                        <TrackProperty>
-                          <ObjectName>DeckLabel</ObjectName>
-                          <Property>title</Property>
-                          <Channel>2</Channel>
-                          <SizePolicy>me,min</SizePolicy>
-                          <Alignment>left</Alignment>
-                        </TrackProperty>
-                        <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>10,-1</MinimumSize></WidgetGroup>
-                        <NumberBpm>
-                          <ObjectName>DeckLabel</ObjectName>
-                          <Channel>2</Channel>
-                          <SizePolicy>min,min</SizePolicy>
-                          <Alignment>left</Alignment>
-                          <Connection>
-                            <ConfigKey>[Channel2],visual_bpm</ConfigKey>
-                          </Connection>
-                        </NumberBpm>
-                        <Label>
-                          <ObjectName>DeckLabel</ObjectName>
-                          <Text> BPM</Text>
-                          <Alignment>left</Alignment>
-                          <SizePolicy>min,min</SizePolicy>
-                        </Label>
-                        <WidgetGroup><SizePolicy>me,min</SizePolicy></WidgetGroup>
-                      </Children>
-                    </WidgetGroup>
-
-                    <Overview>
-                      <ObjectName>OverviewDeck2</ObjectName>
-                      <Channel>2</Channel>
-                      <SizePolicy>me,min</SizePolicy>
-                      <MinimumSize>-1,60</MinimumSize>
-                      <MaximumSize>-1,60</MaximumSize>
-                      <BgColor>#000000</BgColor>
-                      <SignalColor>#FF4080</SignalColor>
-                      <SignalLowColor>#A00040</SignalLowColor>
-                      <SignalMidColor>#FF4080</SignalMidColor>
-                      <SignalHighColor>#FF80C0</SignalHighColor>
-                      <PlayPosColor>#00FF00</PlayPosColor>
-                      <MarkerColor>#FF0000</MarkerColor>
-                      <Mark>
-                        <Control>loop_start_position</Control>
-                        <Color>#FFEE00</Color>
-                        <Align>bottom</Align>
-                      </Mark>
-                      <Mark>
-                        <Control>loop_end_position</Control>
-                        <Color>#FFEE00</Color>
-                        <Align>bottom</Align>
-                      </Mark>
-                      <MarkRange>
-                        <StartControl>loop_start_position</StartControl>
-                        <EndControl>loop_end_position</EndControl>
-                        <EnabledControl>loop_enabled</EnabledControl>
-                        <Color>#FFEE0080</Color>
-                      </MarkRange>
-                    </Overview>
-
-                    <Visual>
-                      <ObjectName>WaveformDeck2</ObjectName>
-                      <Channel>2</Channel>
-                      <SizePolicy>me,me</SizePolicy>
-                      <BgColor>#000000</BgColor>
-                      <SignalColor>#FF4080</SignalColor>
-                      <SignalLowColor>#A00040</SignalLowColor>
-                      <SignalMidColor>#FF4080</SignalMidColor>
-                      <SignalHighColor>#FF80C0</SignalHighColor>
-                      <BeatColor>#FFFFFF</BeatColor>
-                      <PlayPosColor>#00FF00</PlayPosColor>
-                      <AxesColor>#333333</AxesColor>
-                      <MarkerColor>#FF0000</MarkerColor>
-                      <Mark>
-                        <Control>loop_start_position</Control>
-                        <Color>#FFEE00</Color>
-                        <Align>bottom</Align>
-                      </Mark>
-                      <Mark>
-                        <Control>loop_end_position</Control>
-                        <Color>#FFEE00</Color>
-                        <Align>bottom</Align>
-                      </Mark>
-                      <MarkRange>
-                        <StartControl>loop_start_position</StartControl>
-                        <EndControl>loop_end_position</EndControl>
-                        <EnabledControl>loop_enabled</EnabledControl>
-                        <Color>#FFEE0080</Color>
-                      </MarkRange>
-                    </Visual>
-
+                    <Template src="skin:deck.xml">
+                      <SetVariable name="DeckNum">1</SetVariable>
+                      <SetVariable name="DeckLetter">A</SetVariable>
+                      <SetVariable name="SignalColor">#4080FF</SetVariable>
+                      <SetVariable name="SignalLowColor">#0040A0</SetVariable>
+                      <SetVariable name="SignalHighColor">#80C0FF</SetVariable>
+                    </Template>
                   </Children>
                 </WidgetGroup>
 
-                <!-- Mixer Controls (Right - visible when expanded) -->
-                <WidgetGroup>
-                  <ObjectName>Deck2MixerControls</ObjectName>
-                  <Layout>horizontal</Layout>
-                  <SizePolicy>min,me</SizePolicy>
-                  <MaximumSize>280,-1</MaximumSize>
-                  <Connection>
-                    <ConfigKey>[Master],show_extended_controls</ConfigKey>
-                    <BindProperty>visible</BindProperty>
-                  </Connection>
+                <!-- Deck B (trigger=1) -->
+                <WidgetGroup trigger="[Deck],deck_b">
+                  <Layout>vertical</Layout>
+                  <SizePolicy>me,me</SizePolicy>
                   <Children>
-
-                    <!-- Left Spacing -->
-                    <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>10,-1</MinimumSize></WidgetGroup>
-
-                    <!-- EQ Knobs (Vertical Stack) -->
-                    <WidgetGroup>
-                      <Layout>vertical</Layout>
-                      <SizePolicy>min,me</SizePolicy>
-                      <Children>
-
-                        <!-- HIGH B -->
-                        <WidgetGroup>
-                          <Layout>vertical</Layout>
-                          <SizePolicy>me,me</SizePolicy>
-                          <Children>
-                            <Label>
-                              <ObjectName>MixerKnobLabel</ObjectName>
-                              <Text>HIGH</Text>
-                              <Alignment>center</Alignment>
-                              <MinimumSize>-1,15</MinimumSize>
-                            </Label>
-                            <Knob>
-                              <ObjectName>HighKnobDeck2</ObjectName>
-                              <TooltipId>filter_high</TooltipId>
-                              <Size>54,54</Size>
-                              <NumberStates>64</NumberStates>
-                              <Path>skin:images/knob%1.png</Path>
-                              <Connection>
-                                <ConfigKey>[EqualizerRack1_[Channel2]_Effect1],parameter3</ConfigKey>
-                              </Connection>
-                            </Knob>
-                          </Children>
-                        </WidgetGroup>
-
-                        <!-- Spacing -->
-                        <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>-1,5</MinimumSize></WidgetGroup>
-
-                        <!-- MID B -->
-                        <WidgetGroup>
-                          <Layout>vertical</Layout>
-                          <SizePolicy>me,me</SizePolicy>
-                          <Children>
-                            <Label>
-                              <ObjectName>MixerKnobLabel</ObjectName>
-                              <Text>MID</Text>
-                              <Alignment>center</Alignment>
-                              <MinimumSize>-1,15</MinimumSize>
-                            </Label>
-                            <Knob>
-                              <ObjectName>MidKnobDeck2</ObjectName>
-                              <TooltipId>filter_mid</TooltipId>
-                              <Size>54,54</Size>
-                              <NumberStates>64</NumberStates>
-                              <Path>skin:images/knob%1.png</Path>
-                              <Connection>
-                                <ConfigKey>[EqualizerRack1_[Channel2]_Effect1],parameter2</ConfigKey>
-                              </Connection>
-                            </Knob>
-                          </Children>
-                        </WidgetGroup>
-
-                        <!-- Spacing -->
-                        <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>-1,5</MinimumSize></WidgetGroup>
-
-                        <!-- LOW B -->
-                        <WidgetGroup>
-                          <Layout>vertical</Layout>
-                          <SizePolicy>me,me</SizePolicy>
-                          <Children>
-                            <Label>
-                              <ObjectName>MixerKnobLabel</ObjectName>
-                              <Text>LOW</Text>
-                              <Alignment>center</Alignment>
-                              <MinimumSize>-1,15</MinimumSize>
-                            </Label>
-                            <Knob>
-                              <ObjectName>LowKnobDeck2</ObjectName>
-                              <TooltipId>filter_low</TooltipId>
-                              <Size>54,54</Size>
-                              <NumberStates>64</NumberStates>
-                              <Path>skin:images/knob%1.png</Path>
-                              <Connection>
-                                <ConfigKey>[EqualizerRack1_[Channel2]_Effect1],parameter1</ConfigKey>
-                              </Connection>
-                            </Knob>
-                          </Children>
-                        </WidgetGroup>
-
-                      </Children>
-                    </WidgetGroup>
-
-                    <!-- Spacing -->
-                    <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>10,-1</MinimumSize></WidgetGroup>
-
-                    <!-- Faders Horizontal -->
-                    <WidgetGroup>
-                      <Layout>horizontal</Layout>
-                      <SizePolicy>min,me</SizePolicy>
-                      <Children>
-                        <!-- TEMPO B Fader -->
-                        <WidgetGroup>
-                          <Layout>vertical</Layout>
-                          <SizePolicy>me,me</SizePolicy>
-                          <Children>
-                            <Label>
-                              <ObjectName>MixerKnobLabel</ObjectName>
-                              <Text>TEMPO</Text>
-                              <Alignment>center</Alignment>
-                              <MinimumSize>-1,15</MinimumSize>
-                            </Label>
-                            <SliderComposed>
-                              <ObjectName>TempoFaderDeck2</ObjectName>
-                              <Horizontal>false</Horizontal>
-                              <Size>40,90</Size>
-                              <MaximumSize>-1,236</MaximumSize>
-                              <Slider>skin:images/fader_background.svg</Slider>
-                              <Handle>skin:images/fader_handle.svg</Handle>
-                              <Connection>
-                                <ConfigKey>[Channel2],rate</ConfigKey>
-                              </Connection>
-                            </SliderComposed>
-                          </Children>
-                        </WidgetGroup>
-
-                        <!-- Spacing -->
-                        <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>5,-1</MinimumSize></WidgetGroup>
-
-                        <!-- VOLUME B Fader -->
-                        <WidgetGroup>
-                          <Layout>vertical</Layout>
-                          <SizePolicy>me,me</SizePolicy>
-                          <Children>
-                            <Label>
-                              <ObjectName>MixerKnobLabel</ObjectName>
-                              <Text>VOL B</Text>
-                              <Alignment>center</Alignment>
-                              <MinimumSize>-1,15</MinimumSize>
-                            </Label>
-                            <SliderComposed>
-                              <ObjectName>VolumeFaderDeck2</ObjectName>
-                              <Horizontal>false</Horizontal>
-                              <Size>40,90</Size>
-                              <MaximumSize>-1,236</MaximumSize>
-                              <Slider>skin:images/fader_background.svg</Slider>
-                              <Handle>skin:images/fader_handle.svg</Handle>
-                              <Connection>
-                                <ConfigKey>[Channel2],volume</ConfigKey>
-                              </Connection>
-                            </SliderComposed>
-                          </Children>
-                        </WidgetGroup>
-                      </Children>
-                    </WidgetGroup>
-
-                    <!-- Right Spacing -->
-                    <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>10,-1</MinimumSize></WidgetGroup>
-
+                    <Template src="skin:deck.xml">
+                      <SetVariable name="DeckNum">2</SetVariable>
+                      <SetVariable name="DeckLetter">B</SetVariable>
+                      <SetVariable name="SignalColor">#FF4080</SetVariable>
+                      <SetVariable name="SignalLowColor">#A00040</SetVariable>
+                      <SetVariable name="SignalHighColor">#FF80C0</SetVariable>
+                    </Template>
                   </Children>
                 </WidgetGroup>
 
               </Children>
-            </WidgetGroup>
+            </WidgetStack>
 
           </Children>
         </WidgetGroup>

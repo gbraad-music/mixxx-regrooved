@@ -72,6 +72,54 @@ QMenu::separator {
 
 /* Extended Controls Toggle Button */
 #ToggleExtendedButton {
+    background-color: #CC6600;
+    color: #ffffff;
+    border: 1px solid #FF8800;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 6px 12px;
+    margin: 0px 3px;
+}
+
+#ToggleExtendedButton:hover {
+    background-color: #DD7700;
+    color: #ffffff;
+}
+
+#ToggleExtendedButton[value="1"] {
+    background-color: #FF8800;
+    color: #ffffff;
+    border-color: #FFAA00;
+}
+
+/* Deck Mode Toggle Button */
+#ToggleDeckModeButton {
+    background-color: #CC6600;
+    color: #ffffff;
+    border: 1px solid #FF8800;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 6px 12px;
+    margin: 0px 3px;
+}
+
+#ToggleDeckModeButton:hover {
+    background-color: #DD7700;
+    color: #ffffff;
+}
+
+#ToggleDeckModeButton[value="1"] {
+    background-color: #FF8800;
+    color: #ffffff;
+    border-color: #FFAA00;
+}
+
+/* Deck Selector Buttons */
+#ShowBothDecksButton,
+#ShowDeckAButton,
+#ShowDeckBButton {
     background-color: #1a1a1a;
     color: #666666;
     border: 1px solid #222222;
@@ -82,12 +130,16 @@ QMenu::separator {
     margin: 0px 3px;
 }
 
-#ToggleExtendedButton:hover {
+#ShowBothDecksButton:hover,
+#ShowDeckAButton:hover,
+#ShowDeckBButton:hover {
     background-color: #2a2a2a;
     color: #888888;
 }
 
-#ToggleExtendedButton[value="1"] {
+#ShowBothDecksButton[value="1"],
+#ShowDeckAButton[value="1"],
+#ShowDeckBButton[value="1"] {
     background-color: #0066FF;
     color: #ffffff;
     border-color: #0066FF;
@@ -95,7 +147,6 @@ QMenu::separator {
 
 /* View Toggle Buttons */
 #ShowOverviewButton,
-#ShowLibraryButton,
 #ShowMixButton,
 #ShowSamplersButton {
     background-color: #1a1a1a;
@@ -109,7 +160,6 @@ QMenu::separator {
 }
 
 #ShowOverviewButton:hover,
-#ShowLibraryButton:hover,
 #ShowMixButton:hover,
 #ShowSamplersButton:hover {
     background-color: #2a2a2a;
@@ -118,12 +168,34 @@ QMenu::separator {
 
 /* Highlight active tab buttons */
 #ShowOverviewButton[value="1"],
-#ShowLibraryButton[value="1"],
 #ShowMixButton[value="1"],
 #ShowSamplersButton[value="1"] {
     background-color: #0066FF;
     color: #ffffff;
     border-color: #0066FF;
+}
+
+/* Library Button - Different color scheme */
+#ShowLibraryButton {
+    background-color: #1a1a1a;
+    color: #666666;
+    border: 1px solid #222222;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 6px 12px;
+    margin: 0px 3px;
+}
+
+#ShowLibraryButton:hover {
+    background-color: #2a2a2a;
+    color: #888888;
+}
+
+#ShowLibraryButton[value="1"] {
+    background-color: #9900FF;
+    color: #ffffff;
+    border-color: #BB00FF;
 }
 
 
@@ -448,6 +520,8 @@ QTreeView::branch:selected {
 }
 
 /* Deck Rows */
+#Deck1Row,
+#Deck2Row,
 #DeckARow,
 #DeckBRow,
 #CrossfaderSection {

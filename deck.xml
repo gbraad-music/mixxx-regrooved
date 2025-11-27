@@ -1,0 +1,270 @@
+<Template>
+  <SetVariable name="deck_label">DECK <Variable name="DeckLetter"/></SetVariable>
+
+  <WidgetGroup>
+    <ObjectName>Deck<Variable name="DeckNum"/>Row</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>me,me</SizePolicy>
+    <MinimumSize>-1,200</MinimumSize>
+    <Children>
+
+      <!-- Left Margin -->
+      <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>6,-1</MinimumSize></WidgetGroup>
+
+      <!-- Transport Buttons (Left) -->
+      <WidgetGroup>
+        <ObjectName>Deck<Variable name="DeckLetter"/>Controls</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>min,me</SizePolicy>
+        <Children>
+
+          <!-- Big Play Button (visible when collapsed) -->
+          <WidgetGroup>
+            <SizePolicy>min,min</SizePolicy>
+            <MinimumSize>140,140</MinimumSize>
+            <Connection>
+              <ConfigKey>[Master],show_extended_controls</ConfigKey>
+              <BindProperty>visible</BindProperty>
+              <Transform><Not/></Transform>
+            </Connection>
+            <Children>
+              <PushButton>
+                <ObjectName>PlayButtonDeck<Variable name="DeckNum"/></ObjectName>
+                <Size>130,130</Size>
+                <NumberStates>2</NumberStates>
+                <State>
+                  <Number>0</Number>
+                  <Text>PLAY</Text>
+                </State>
+                <State>
+                  <Number>1</Number>
+                  <Text>PLAY</Text>
+                </State>
+                <Connection>
+                  <ConfigKey>[Channel<Variable name="DeckNum"/>],play</ConfigKey>
+                  <ButtonState>LeftButton</ButtonState>
+                </Connection>
+              </PushButton>
+            </Children>
+          </WidgetGroup>
+
+          <!-- Small Transport Controls 2x2 Grid (visible when expanded) -->
+          <WidgetGroup>
+            <Layout>vertical</Layout>
+            <SizePolicy>min,me</SizePolicy>
+            <MinimumSize>130,-1</MinimumSize>
+            <Connection>
+              <ConfigKey>[Master],show_extended_controls</ConfigKey>
+              <BindProperty>visible</BindProperty>
+            </Connection>
+            <Children>
+              <!-- Row 1: CUE, PLAY -->
+              <WidgetGroup>
+                <Layout>horizontal</Layout>
+                <SizePolicy>min,min</SizePolicy>
+                <Children>
+                  <PushButton>
+                    <ObjectName>CueButtonDeck<Variable name="DeckNum"/></ObjectName>
+                    <Size>60,60</Size>
+                    <NumberStates>1</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                      <Text>CUE</Text>
+                    </State>
+                    <Connection>
+                      <ConfigKey>[Channel<Variable name="DeckNum"/>],cue_default</ConfigKey>
+                      <ButtonState>LeftButton</ButtonState>
+                    </Connection>
+                  </PushButton>
+                  <PushButton>
+                    <ObjectName>PlayButtonDeck<Variable name="DeckNum"/>Small</ObjectName>
+                    <Size>60,60</Size>
+                    <NumberStates>2</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                      <Text>PLAY</Text>
+                    </State>
+                    <State>
+                      <Number>1</Number>
+                      <Text>PLAY</Text>
+                    </State>
+                    <Connection>
+                      <ConfigKey>[Channel<Variable name="DeckNum"/>],play</ConfigKey>
+                      <ButtonState>LeftButton</ButtonState>
+                    </Connection>
+                  </PushButton>
+                </Children>
+              </WidgetGroup>
+              <!-- Row 2: SYNC, LOOP -->
+              <WidgetGroup>
+                <Layout>horizontal</Layout>
+                <SizePolicy>min,min</SizePolicy>
+                <Children>
+                  <PushButton>
+                    <ObjectName>SyncButtonDeck<Variable name="DeckNum"/></ObjectName>
+                    <Size>60,60</Size>
+                    <NumberStates>2</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                      <Text>SYNC</Text>
+                    </State>
+                    <State>
+                      <Number>1</Number>
+                      <Text>SYNC</Text>
+                    </State>
+                    <Connection>
+                      <ConfigKey>[Channel<Variable name="DeckNum"/>],sync_enabled</ConfigKey>
+                      <ButtonState>LeftButton</ButtonState>
+                    </Connection>
+                  </PushButton>
+                  <PushButton>
+                    <ObjectName>LoopButtonDeck<Variable name="DeckNum"/></ObjectName>
+                    <Size>60,60</Size>
+                    <NumberStates>2</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                      <Text>LOOP</Text>
+                    </State>
+                    <State>
+                      <Number>1</Number>
+                      <Text>LOOP</Text>
+                    </State>
+                    <Connection>
+                      <ConfigKey>[Channel<Variable name="DeckNum"/>],beatloop_4_enabled</ConfigKey>
+                    </Connection>
+                    <Connection>
+                      <ConfigKey>[Channel<Variable name="DeckNum"/>],beatloop_4_toggle</ConfigKey>
+                      <EmitOnPressAndRelease>true</EmitOnPressAndRelease>
+                      <ButtonState>LeftButton</ButtonState>
+                    </Connection>
+                  </PushButton>
+                </Children>
+              </WidgetGroup>
+            </Children>
+          </WidgetGroup>
+
+        </Children>
+      </WidgetGroup>
+
+      <!-- Waveform (Center) -->
+      <WidgetGroup>
+        <ObjectName>Deck<Variable name="DeckNum"/>WaveformContainer</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>me,me</SizePolicy>
+        <Children>
+
+          <WidgetGroup>
+            <ObjectName>DeckLabelGroup</ObjectName>
+            <Layout>horizontal</Layout>
+            <SizePolicy>me,min</SizePolicy>
+            <MinimumSize>-1,25</MinimumSize>
+            <MaximumSize>-1,25</MaximumSize>
+            <Children>
+              <Label>
+                <ObjectName>DeckLabel</ObjectName>
+                <Text><Variable name="deck_label"/></Text>
+                <Alignment>left</Alignment>
+                <SizePolicy>min,min</SizePolicy>
+              </Label>
+              <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>10,-1</MinimumSize></WidgetGroup>
+              <TrackProperty>
+                <ObjectName>DeckLabel</ObjectName>
+                <Property>title</Property>
+                <Channel><Variable name="DeckNum"/></Channel>
+                <SizePolicy>me,min</SizePolicy>
+                <Alignment>left</Alignment>
+              </TrackProperty>
+              <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>10,-1</MinimumSize></WidgetGroup>
+              <NumberBpm>
+                <ObjectName>DeckLabel</ObjectName>
+                <Channel><Variable name="DeckNum"/></Channel>
+                <SizePolicy>min,min</SizePolicy>
+                <Alignment>left</Alignment>
+                <Connection>
+                  <ConfigKey>[Channel<Variable name="DeckNum"/>],visual_bpm</ConfigKey>
+                </Connection>
+              </NumberBpm>
+              <Label>
+                <ObjectName>DeckLabel</ObjectName>
+                <Text> BPM</Text>
+                <Alignment>left</Alignment>
+                <SizePolicy>min,min</SizePolicy>
+              </Label>
+              <WidgetGroup><SizePolicy>me,min</SizePolicy></WidgetGroup>
+            </Children>
+          </WidgetGroup>
+
+          <Overview>
+            <ObjectName>OverviewDeck<Variable name="DeckNum"/></ObjectName>
+            <Channel><Variable name="DeckNum"/></Channel>
+            <SizePolicy>me,min</SizePolicy>
+            <MinimumSize>-1,60</MinimumSize>
+            <MaximumSize>-1,60</MaximumSize>
+            <BgColor>#000000</BgColor>
+            <SignalColor><Variable name="SignalColor"/></SignalColor>
+            <SignalLowColor><Variable name="SignalLowColor"/></SignalLowColor>
+            <SignalMidColor><Variable name="SignalColor"/></SignalMidColor>
+            <SignalHighColor><Variable name="SignalHighColor"/></SignalHighColor>
+            <PlayPosColor>#00FF00</PlayPosColor>
+            <MarkerColor>#FF0000</MarkerColor>
+            <Mark>
+              <Control>loop_start_position</Control>
+              <Color>#FFEE00</Color>
+              <Align>bottom</Align>
+            </Mark>
+            <Mark>
+              <Control>loop_end_position</Control>
+              <Color>#FFEE00</Color>
+              <Align>bottom</Align>
+            </Mark>
+            <MarkRange>
+              <StartControl>loop_start_position</StartControl>
+              <EndControl>loop_end_position</EndControl>
+              <EnabledControl>loop_enabled</EnabledControl>
+              <Color>#FFEE0080</Color>
+            </MarkRange>
+          </Overview>
+
+          <Visual>
+            <ObjectName>WaveformDeck<Variable name="DeckNum"/></ObjectName>
+            <Channel><Variable name="DeckNum"/></Channel>
+            <SizePolicy>me,me</SizePolicy>
+            <BgColor>#000000</BgColor>
+            <SignalColor><Variable name="SignalColor"/></SignalColor>
+            <SignalLowColor><Variable name="SignalLowColor"/></SignalLowColor>
+            <SignalMidColor><Variable name="SignalColor"/></SignalMidColor>
+            <SignalHighColor><Variable name="SignalHighColor"/></SignalHighColor>
+            <BeatColor>#FFFFFF</BeatColor>
+            <PlayPosColor>#00FF00</PlayPosColor>
+            <AxesColor>#333333</AxesColor>
+            <MarkerColor>#FF0000</MarkerColor>
+            <Mark>
+              <Control>loop_start_position</Control>
+              <Color>#FFEE00</Color>
+              <Align>bottom</Align>
+            </Mark>
+            <Mark>
+              <Control>loop_end_position</Control>
+              <Color>#FFEE00</Color>
+              <Align>bottom</Align>
+            </Mark>
+            <MarkRange>
+              <StartControl>loop_start_position</StartControl>
+              <EndControl>loop_end_position</EndControl>
+              <EnabledControl>loop_enabled</EnabledControl>
+              <Color>#FFEE0080</Color>
+            </MarkRange>
+          </Visual>
+
+        </Children>
+      </WidgetGroup>
+
+      <!-- Mixer Controls (Right - visible when expanded) -->
+      <Template src="skin:mixer.xml">
+        <SetVariable name="DeckNum"><Variable name="DeckNum"/></SetVariable>
+        <SetVariable name="DeckLetter"><Variable name="DeckLetter"/></SetVariable>
+      </Template>
+
+    </Children>
+  </WidgetGroup>
+</Template>
