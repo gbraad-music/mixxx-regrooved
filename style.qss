@@ -1,0 +1,458 @@
+/* Regrooved Skin Stylesheet - Pure Black Theme */
+
+/* Main Container */
+#MainContainer {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Top Bar */
+#TopBar {
+    background-color: #000000;
+    border-bottom: 1px solid #111111;
+    padding: 5px 10px;
+}
+
+#AppTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555555;
+    letter-spacing: 2px;
+    padding: 5px 10px;
+}
+
+/* Extended Controls Toggle Button */
+#ToggleExtendedButton {
+    background-color: #1a1a1a;
+    color: #666666;
+    border: 1px solid #222222;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px;
+    margin: 0px 3px;
+}
+
+#ToggleExtendedButton:hover {
+    background-color: #2a2a2a;
+    color: #888888;
+}
+
+#ToggleExtendedButton[value="1"] {
+    background-color: #0066FF;
+    color: #ffffff;
+    border-color: #0066FF;
+}
+
+/* View Toggle Buttons */
+#ShowOverviewButton,
+#ShowLibraryButton,
+#ShowMixButton,
+#ShowSamplersButton {
+    background-color: #1a1a1a;
+    color: #666666;
+    border: 1px solid #222222;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 6px 12px;
+    margin: 0px 3px;
+}
+
+#ShowOverviewButton:hover,
+#ShowLibraryButton:hover,
+#ShowMixButton:hover,
+#ShowSamplersButton:hover {
+    background-color: #2a2a2a;
+    color: #888888;
+}
+
+/* Highlight active tab buttons */
+#ShowOverviewButton[value="1"],
+#ShowLibraryButton[value="1"],
+#ShowMixButton[value="1"],
+#ShowSamplersButton[value="1"] {
+    background-color: #0066FF;
+    color: #ffffff;
+    border-color: #0066FF;
+}
+
+
+/* Waveform Containers */
+#WaveformStack {
+    background-color: #000000;
+    padding: 3px;
+}
+
+#Deck1WaveformContainer,
+#Deck2WaveformContainer {
+    background-color: #000000;
+    border: 1px solid #0a0a0a;
+    margin: 3px;
+    border-radius: 4px;
+}
+
+#DeckLabel {
+    background-color: #000000;
+    color: #555555;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 3px;
+    border-bottom: 1px solid #0a0a0a;
+}
+
+/* Left Side Controls */
+#LeftControls {
+    background-color: #000000;
+    border-right: 1px solid #0a0a0a;
+    padding: 3px;
+}
+
+#DeckAControls,
+#DeckBControls {
+    padding: 3px;
+    margin: 0px;
+}
+
+#DeckControlLabel {
+    background-color: #000000;
+    color: #555555;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 5px;
+}
+
+/* Play Buttons - RED when stopped, GREEN when playing */
+#PlayButtonDeck1,
+#PlayButtonDeck2,
+#PlayButtonDeck1Small,
+#PlayButtonDeck2Small {
+    background-color: #AA0000;
+    color: #ffffff;
+    border: 2px solid #DD0000;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 3px;
+}
+
+#PlayButtonDeck1:hover,
+#PlayButtonDeck2:hover,
+#PlayButtonDeck1Small:hover,
+#PlayButtonDeck2Small:hover {
+    background-color: #CC0000;
+    border-color: #FF0000;
+}
+
+#PlayButtonDeck1:pressed,
+#PlayButtonDeck2:pressed,
+#PlayButtonDeck1Small:pressed,
+#PlayButtonDeck2Small:pressed {
+    background-color: #880000;
+    border-color: #990000;
+}
+
+#PlayButtonDeck1[value="1"],
+#PlayButtonDeck2[value="1"],
+#PlayButtonDeck1Small[value="1"],
+#PlayButtonDeck2Small[value="1"] {
+    background-color: #00FF00;
+    color: #000000;
+    border-color: #44FF44;
+}
+
+/* Smaller font for small play buttons in extended grid */
+#PlayButtonDeck1Small,
+#PlayButtonDeck2Small {
+    font-size: 12px;
+}
+
+
+/* Extended Control Buttons - CUE, SYNC, LOOP */
+#CueButtonDeck1,
+#CueButtonDeck2 {
+    background-color: #CC6600;
+    color: #ffffff;
+    border: 2px solid #FF8800;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 3px;
+    min-width: 64px;
+    max-width: 64px;
+    min-height: 64px;
+    max-height: 64px;
+}
+
+#CueButtonDeck1:hover,
+#CueButtonDeck2:hover {
+    background-color: #DD7700;
+    border-color: #FFAA00;
+}
+
+#CueButtonDeck1:pressed,
+#CueButtonDeck2:pressed {
+    background-color: #AA5500;
+    border-color: #CC6600;
+}
+
+#SyncButtonDeck1,
+#SyncButtonDeck2 {
+    background-color: #0066CC;
+    color: #ffffff;
+    border: 2px solid #0088FF;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 3px;
+    min-width: 64px;
+    max-width: 64px;
+    min-height: 64px;
+    max-height: 64px;
+}
+
+#SyncButtonDeck1:hover,
+#SyncButtonDeck2:hover {
+    background-color: #0077DD;
+    border-color: #00AAFF;
+}
+
+#SyncButtonDeck1[value="1"],
+#SyncButtonDeck2[value="1"] {
+    background-color: #00AAFF;
+    color: #000000;
+    border-color: #44CCFF;
+}
+
+#LoopButtonDeck1,
+#LoopButtonDeck2 {
+    background-color: #CCAA00;
+    color: #ffffff;
+    border: 2px solid #FFCC00;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 3px;
+    min-width: 64px;
+    max-width: 64px;
+    min-height: 64px;
+    max-height: 64px;
+}
+
+/* Small Play buttons in grid */
+#PlayButtonDeck1Small,
+#PlayButtonDeck2Small {
+    min-width: 64px;
+    max-width: 64px;
+    min-height: 64px;
+    max-height: 64px;
+    font-size: 11px;
+}
+
+#LoopButtonDeck1:hover,
+#LoopButtonDeck2:hover {
+    background-color: #DDBB00;
+    border-color: #FFDD00;
+}
+
+#LoopButtonDeck1[value="1"],
+#LoopButtonDeck2[value="1"] {
+    background-color: #FFEE00;
+    color: #000000;
+    border-color: #FFFF44;
+}
+
+/* Library Widget */
+#LibraryWidget {
+    background-color: #000000;
+    color: #888888;
+    border: none;
+    margin: 0px;
+}
+
+QTableView {
+    background-color: #000000;
+    color: #888888;
+    gridline-color: #0a0a0a;
+    selection-background-color: #0066FF;
+    selection-color: #ffffff;
+    border: none;
+    alternate-background-color: #000000;
+    font-size: 20px;
+}
+
+QTableView::item {
+    background-color: #000000;
+    padding: 6px;
+}
+
+QTableView::item:alternate {
+    background-color: #000000;
+}
+
+QTableView::item:hover {
+    background-color: #0a0a0a;
+}
+
+QHeaderView::section {
+    background-color: #000000;
+    color: #555555;
+    border: 1px solid #0a0a0a;
+    padding: 4px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+QScrollBar:vertical {
+    background-color: #000000;
+    width: 10px;
+    border: none;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #1a1a1a;
+    border-radius: 0px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #2a2a2a;
+}
+
+QScrollBar:horizontal {
+    background-color: #000000;
+    height: 10px;
+    border: none;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #1a1a1a;
+    border-radius: 0px;
+    min-width: 20px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: #2a2a2a;
+}
+
+QScrollBar::add-line,
+QScrollBar::sub-line {
+    border: none;
+    background: none;
+}
+
+/* Searchbox */
+WSearchLineEdit {
+    background-color: #0a0a0a;
+    color: #888888;
+    border: 1px solid #1a1a1a;
+    border-radius: 0px;
+    padding: 4px;
+    font-size: 11px;
+}
+
+WSearchLineEdit:focus {
+    border-color: #0066FF;
+    color: #ffffff;
+}
+
+/* Sidebar */
+QTreeView {
+    background-color: #000000;
+    color: #888888;
+    border: none;
+    selection-background-color: #0066FF;
+    selection-color: #ffffff;
+}
+
+QTreeView::item {
+    padding: 2px;
+}
+
+QTreeView::item:hover {
+    background-color: #0a0a0a;
+}
+
+QTreeView::branch:selected {
+    background-color: #0066FF;
+}
+
+/* Placeholder Labels for Samplers views */
+#PlaceholderLabel {
+    background-color: #000000;
+    color: #555555;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* Mixer Panel */
+#MixContainer {
+    background-color: #000000;
+    padding: 10px;
+}
+
+#MixerEQSection {
+    background-color: #000000;
+}
+
+#MixerColumnA,
+#MixerColumnB {
+    background-color: #000000;
+    border: 1px solid #0a0a0a;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px;
+}
+
+#MixerChannelLabel {
+    background-color: #000000;
+    color: #555555;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 5px;
+}
+
+#MixerKnobLabel {
+    background-color: #000000;
+    color: #666666;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 3px;
+}
+
+#KnobValue {
+    background-color: #000000;
+    color: #888888;
+    font-size: 9px;
+    padding: 2px;
+}
+
+/* Knobs - styled via XML image reference */
+
+/* Vertical Faders */
+#VolumeFaderDeck1,
+#VolumeFaderDeck2,
+#TempoFaderDeck1,
+#TempoFaderDeck2 {
+    background-color: #2a2a2a;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+}
+
+/* Crossfader */
+#Crossfader {
+    background-color: #2a2a2a;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+}
+
+#MixerBottomSection {
+    background-color: #000000;
+    padding: 10px;
+    margin-top: 10px;
+}
