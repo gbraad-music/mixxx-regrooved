@@ -76,9 +76,9 @@ QMenu::separator {
     color: #666666;
     border: 1px solid #222222;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: bold;
-    padding: 6px;
+    padding: 6px 12px;
     margin: 0px 3px;
 }
 
@@ -130,15 +130,7 @@ QMenu::separator {
 /* Waveform Containers */
 #WaveformStack {
     background-color: #000000;
-    padding: 3px;
-}
-
-#Deck1WaveformContainer,
-#Deck2WaveformContainer {
-    background-color: #000000;
-    border: 1px solid #0a0a0a;
-    margin: 3px;
-    border-radius: 4px;
+    padding: 0px;
 }
 
 #DeckLabel {
@@ -450,10 +442,32 @@ QTreeView::branch:selected {
 #MixerColumnA,
 #MixerColumnB {
     background-color: #000000;
-    border: 1px solid #0a0a0a;
-    border-radius: 4px;
+    border: none;
     padding: 10px;
     margin: 5px;
+}
+
+/* Deck Rows */
+#DeckARow,
+#DeckBRow,
+#CrossfaderSection {
+    background-color: #000000;
+}
+
+#DeckAControls,
+#DeckBControls {
+    background-color: #000000;
+}
+
+#Deck1MixerControls,
+#Deck2MixerControls {
+    background-color: #000000;
+}
+
+#Deck1WaveformContainer,
+#Deck2WaveformContainer {
+    background-color: #000000;
+    border: none;
 }
 
 #MixerChannelLabel {
