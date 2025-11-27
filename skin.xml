@@ -321,10 +321,51 @@
           <Layout>vertical</Layout>
           <SizePolicy>me,me</SizePolicy>
           <Children>
+
             <Library>
               <ObjectName>LibraryWidget</ObjectName>
               <SizePolicy>me,me</SizePolicy>
             </Library>
+
+            <!-- Load Buttons Bar -->
+            <WidgetGroup>
+              <ObjectName>LibraryLoadBar</ObjectName>
+              <Layout>horizontal</Layout>
+              <SizePolicy>me,min</SizePolicy>
+              <MinimumSize>-1,60</MinimumSize>
+              <MaximumSize>-1,60</MaximumSize>
+              <Children>
+                <PushButton>
+                  <ObjectName>LoadToDeckAButton</ObjectName>
+                  <MinimumSize>200,50</MinimumSize>
+                  <SizePolicy>me,min</SizePolicy>
+                  <NumberStates>1</NumberStates>
+                  <State>
+                    <Number>0</Number>
+                    <Text>LOAD TO DECK A</Text>
+                  </State>
+                  <Connection>
+                    <ConfigKey>[Channel1],LoadSelectedTrack</ConfigKey>
+                    <ButtonState>LeftButton</ButtonState>
+                  </Connection>
+                </PushButton>
+                <PushButton>
+                  <ObjectName>LoadToDeckBButton</ObjectName>
+                  <MinimumSize>200,50</MinimumSize>
+                  <SizePolicy>me,min</SizePolicy>
+                  <NumberStates>1</NumberStates>
+                  <State>
+                    <Number>0</Number>
+                    <Text>LOAD TO DECK B</Text>
+                  </State>
+                  <Connection>
+                    <ConfigKey>[Channel2],LoadSelectedTrack</ConfigKey>
+                    <ButtonState>LeftButton</ButtonState>
+                  </Connection>
+                </PushButton>
+              </Children>
+            </WidgetGroup>
+
           </Children>
         </WidgetGroup>
 

@@ -377,6 +377,48 @@ QMenu::separator {
     border-color: #FFFF44;
 }
 
+/* Library Load Bar */
+#LibraryLoadBar {
+    background-color: #000000;
+    border-bottom: 1px solid #0a0a0a;
+    padding: 7px;
+}
+
+#LoadToDeckAButton,
+#LoadToDeckBButton {
+    background-color: #1a1a1a;
+    color: #888888;
+    border: 2px solid #2a2a2a;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 16px;
+}
+
+#LoadToDeckAButton:hover {
+    background-color: #2a2a2a;
+    color: #4080FF;
+    border-color: #4080FF;
+}
+
+#LoadToDeckBButton:hover {
+    background-color: #2a2a2a;
+    color: #FF4080;
+    border-color: #FF4080;
+}
+
+#LoadToDeckAButton:pressed {
+    background-color: #4080FF;
+    color: #ffffff;
+    border-color: #4080FF;
+}
+
+#LoadToDeckBButton:pressed {
+    background-color: #FF4080;
+    color: #ffffff;
+    border-color: #FF4080;
+}
+
 /* Library Widget */
 #LibraryWidget {
     background-color: #000000;
