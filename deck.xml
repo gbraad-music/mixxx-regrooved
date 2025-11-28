@@ -8,8 +8,16 @@
     <MinimumSize>-1,200</MinimumSize>
     <Children>
 
+      <!-- Color Accent Strip -->
+      <WidgetGroup>
+        <ObjectName>DeckAccent<Variable name="DeckLetter"/></ObjectName>
+        <SizePolicy>min,me</SizePolicy>
+        <MinimumSize>3,-1</MinimumSize>
+        <MaximumSize>3,-1</MaximumSize>
+      </WidgetGroup>
+
       <!-- Left Margin -->
-      <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>6,-1</MinimumSize></WidgetGroup>
+      <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>3,-1</MinimumSize></WidgetGroup>
 
       <!-- Transport Buttons (Left) -->
       <WidgetGroup>

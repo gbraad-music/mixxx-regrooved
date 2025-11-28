@@ -11,6 +11,7 @@
       <attribute persist="true" config_key="[Tab],current">overview</attribute>
       <attribute persist="true" config_key="[Master],show_extended_controls">0</attribute>
       <attribute persist="true" config_key="[Master],show_single_deck">0</attribute>
+      <attribute persist="true" config_key="[Master],horizontal_dual_deck">0</attribute>
       <attribute persist="true" config_key="[Deck],current_deck">1</attribute>
       <attribute config_key="[Deck],show_deck_a">1</attribute>
       <attribute config_key="[Deck],show_deck_b">0</attribute>
@@ -102,6 +103,35 @@
           </Connection>
           <Connection>
             <ConfigKey>[Tab],overview</ConfigKey>
+            <ButtonState>LeftButton</ButtonState>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Master],show_single_deck</ConfigKey>
+            <BindProperty>visible</BindProperty>
+            <Transform><Not/></Transform>
+          </Connection>
+        </PushButton>
+
+        <!-- Horizontal/Vertical Layout Toggle (visible in dual deck mode) -->
+        <PushButton>
+          <ObjectName>ToggleLayoutButton</ObjectName>
+          <Size>90,30</Size>
+          <NumberStates>2</NumberStates>
+          <State>
+            <Number>0</Number>
+            <Text>STACKED</Text>
+          </State>
+          <State>
+            <Number>1</Number>
+            <Text>SIDE BY SIDE</Text>
+          </State>
+          <Connection>
+            <ConfigKey>[Master],horizontal_dual_deck</ConfigKey>
+            <BindProperty>value</BindProperty>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Master],horizontal_dual_deck</ConfigKey>
+            <EmitOnDownPress>true</EmitOnDownPress>
             <ButtonState>LeftButton</ButtonState>
           </Connection>
           <Connection>
@@ -206,8 +236,7 @@
           <Children>
 
             <!-- Dual Deck View (visible when show_single_deck=0) -->
-            <WidgetGroup>
-              <Layout>vertical</Layout>
+            <WidgetStack currentpage="[Master],horizontal_dual_deck">
               <SizePolicy>me,me</SizePolicy>
               <Connection>
                 <ConfigKey>[Master],show_single_deck</ConfigKey>
@@ -216,59 +245,127 @@
               </Connection>
               <Children>
 
-                <!-- Deck A Row -->
-                <Template src="skin:deck.xml">
-                  <SetVariable name="DeckNum">1</SetVariable>
-                  <SetVariable name="DeckLetter">A</SetVariable>
-                  <SetVariable name="SignalColor">#4080FF</SetVariable>
-                  <SetVariable name="SignalLowColor">#0040A0</SetVariable>
-                  <SetVariable name="SignalHighColor">#80C0FF</SetVariable>
-                </Template>
-
-                <!-- Crossfader (between decks, visible when expanded) -->
-                <WidgetGroup>
-                  <ObjectName>CrossfaderSection</ObjectName>
-                  <Layout>horizontal</Layout>
-                  <SizePolicy>me,min</SizePolicy>
-                  <MinimumSize>-1,35</MinimumSize>
-                  <Connection>
-                    <ConfigKey>[Master],show_extended_controls</ConfigKey>
-                    <BindProperty>visible</BindProperty>
-                  </Connection>
+                <!-- Stacked/Vertical Layout (trigger=0) -->
+                <WidgetGroup trigger="0">
+                  <Layout>vertical</Layout>
+                  <SizePolicy>me,me</SizePolicy>
                   <Children>
-                    <WidgetGroup><SizePolicy>me,min</SizePolicy></WidgetGroup>
-                    <Label>
-                      <ObjectName>MixerKnobLabel</ObjectName>
-                      <Text>X-FADE</Text>
-                      <Alignment>right</Alignment>
-                      <MinimumSize>60,-1</MinimumSize>
-                      <SizePolicy>min,min</SizePolicy>
-                    </Label>
-                    <SliderComposed>
-                      <ObjectName>Crossfader</ObjectName>
-                      <Horizontal>true</Horizontal>
-                      <Size>200,24</Size>
-                      <Slider>skin:images/crossfader_background.svg</Slider>
-                      <Handle>skin:images/crossfader_handle.svg</Handle>
+
+                    <!-- Deck A Row -->
+                    <Template src="skin:deck.xml">
+                      <SetVariable name="DeckNum">1</SetVariable>
+                      <SetVariable name="DeckLetter">A</SetVariable>
+                      <SetVariable name="SignalColor">#4080FF</SetVariable>
+                      <SetVariable name="SignalLowColor">#0040A0</SetVariable>
+                      <SetVariable name="SignalHighColor">#80C0FF</SetVariable>
+                    </Template>
+
+                    <!-- Crossfader (between decks, visible when expanded) -->
+                    <WidgetGroup>
+                      <ObjectName>CrossfaderSection</ObjectName>
+                      <Layout>horizontal</Layout>
+                      <SizePolicy>me,min</SizePolicy>
+                      <MinimumSize>-1,35</MinimumSize>
                       <Connection>
-                        <ConfigKey>[Master],crossfader</ConfigKey>
+                        <ConfigKey>[Master],show_extended_controls</ConfigKey>
+                        <BindProperty>visible</BindProperty>
                       </Connection>
-                    </SliderComposed>
-                    <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>20,-1</MinimumSize></WidgetGroup>
+                      <Children>
+                        <WidgetGroup><SizePolicy>me,min</SizePolicy></WidgetGroup>
+                        <Label>
+                          <ObjectName>MixerKnobLabel</ObjectName>
+                          <Text>X-FADE</Text>
+                          <Alignment>right</Alignment>
+                          <MinimumSize>60,-1</MinimumSize>
+                          <SizePolicy>min,min</SizePolicy>
+                        </Label>
+                        <SliderComposed>
+                          <ObjectName>Crossfader</ObjectName>
+                          <Horizontal>true</Horizontal>
+                          <Size>200,24</Size>
+                          <Slider>skin:images/crossfader_background.svg</Slider>
+                          <Handle>skin:images/crossfader_handle.svg</Handle>
+                          <Connection>
+                            <ConfigKey>[Master],crossfader</ConfigKey>
+                          </Connection>
+                        </SliderComposed>
+                        <WidgetGroup><SizePolicy>min,min</SizePolicy><MinimumSize>20,-1</MinimumSize></WidgetGroup>
+                      </Children>
+                    </WidgetGroup>
+
+                    <!-- Deck B Row -->
+                    <Template src="skin:deck.xml">
+                      <SetVariable name="DeckNum">2</SetVariable>
+                      <SetVariable name="DeckLetter">B</SetVariable>
+                      <SetVariable name="SignalColor">#FF4080</SetVariable>
+                      <SetVariable name="SignalLowColor">#A00040</SetVariable>
+                      <SetVariable name="SignalHighColor">#FF80C0</SetVariable>
+                    </Template>
+
                   </Children>
                 </WidgetGroup>
 
-                <!-- Deck B Row -->
-                <Template src="skin:deck.xml">
-                  <SetVariable name="DeckNum">2</SetVariable>
-                  <SetVariable name="DeckLetter">B</SetVariable>
-                  <SetVariable name="SignalColor">#FF4080</SetVariable>
-                  <SetVariable name="SignalLowColor">#A00040</SetVariable>
-                  <SetVariable name="SignalHighColor">#FF80C0</SetVariable>
-                </Template>
+                <!-- Side-by-Side/Horizontal Layout (trigger=1) -->
+                <WidgetGroup trigger="1">
+                  <Layout>horizontal</Layout>
+                  <SizePolicy>me,me</SizePolicy>
+                  <Children>
+
+                    <!-- Deck A Column -->
+                    <Template src="skin:deck.xml">
+                      <SetVariable name="DeckNum">1</SetVariable>
+                      <SetVariable name="DeckLetter">A</SetVariable>
+                      <SetVariable name="SignalColor">#4080FF</SetVariable>
+                      <SetVariable name="SignalLowColor">#0040A0</SetVariable>
+                      <SetVariable name="SignalHighColor">#80C0FF</SetVariable>
+                    </Template>
+
+                    <!-- Crossfader (vertical, between decks, visible when expanded) -->
+                    <WidgetGroup>
+                      <ObjectName>CrossfaderSectionVertical</ObjectName>
+                      <Layout>vertical</Layout>
+                      <SizePolicy>min,me</SizePolicy>
+                      <MinimumSize>50,-1</MinimumSize>
+                      <Connection>
+                        <ConfigKey>[Master],show_extended_controls</ConfigKey>
+                        <BindProperty>visible</BindProperty>
+                      </Connection>
+                      <Children>
+                        <WidgetGroup><SizePolicy>min,me</SizePolicy></WidgetGroup>
+                        <Label>
+                          <ObjectName>MixerKnobLabel</ObjectName>
+                          <Text>X-FADE</Text>
+                          <Alignment>center</Alignment>
+                          <SizePolicy>min,min</SizePolicy>
+                        </Label>
+                        <SliderComposed>
+                          <ObjectName>Crossfader</ObjectName>
+                          <Horizontal>true</Horizontal>
+                          <Size>200,24</Size>
+                          <Slider>skin:images/crossfader_background.svg</Slider>
+                          <Handle>skin:images/crossfader_handle.svg</Handle>
+                          <Connection>
+                            <ConfigKey>[Master],crossfader</ConfigKey>
+                          </Connection>
+                        </SliderComposed>
+                        <WidgetGroup><SizePolicy>min,me</SizePolicy></WidgetGroup>
+                      </Children>
+                    </WidgetGroup>
+
+                    <!-- Deck B Column -->
+                    <Template src="skin:deck.xml">
+                      <SetVariable name="DeckNum">2</SetVariable>
+                      <SetVariable name="DeckLetter">B</SetVariable>
+                      <SetVariable name="SignalColor">#FF4080</SetVariable>
+                      <SetVariable name="SignalLowColor">#A00040</SetVariable>
+                      <SetVariable name="SignalHighColor">#FF80C0</SetVariable>
+                    </Template>
+
+                  </Children>
+                </WidgetGroup>
 
               </Children>
-            </WidgetGroup>
+            </WidgetStack>
 
             <!-- Single Deck View (visible when show_single_deck=1) -->
             <WidgetStack currentpage="[Deck],current_deck">

@@ -119,7 +119,8 @@ QMenu::separator {
 /* Deck Selector Buttons */
 #ShowBothDecksButton,
 #ShowDeckAButton,
-#ShowDeckBButton {
+#ShowDeckBButton,
+#ToggleLayoutButton {
     background-color: #1a1a1a;
     color: #666666;
     border: 1px solid #222222;
@@ -132,17 +133,34 @@ QMenu::separator {
 
 #ShowBothDecksButton:hover,
 #ShowDeckAButton:hover,
-#ShowDeckBButton:hover {
+#ShowDeckBButton:hover,
+#ToggleLayoutButton:hover {
     background-color: #2a2a2a;
     color: #888888;
 }
 
-#ShowBothDecksButton[value="1"],
-#ShowDeckAButton[value="1"],
-#ShowDeckBButton[value="1"] {
+#ShowBothDecksButton[value="1"] {
     background-color: #0066FF;
     color: #ffffff;
     border-color: #0066FF;
+}
+
+#ShowDeckAButton[value="1"] {
+    background-color: #FF0000;
+    color: #ffffff;
+    border-color: #FF0000;
+}
+
+#ShowDeckBButton[value="1"] {
+    background-color: #0000FF;
+    color: #ffffff;
+    border-color: #0000FF;
+}
+
+#ToggleLayoutButton[value="1"] {
+    background-color: #00AA66;
+    color: #ffffff;
+    border-color: #00DD88;
 }
 
 /* View Toggle Buttons */
@@ -388,35 +406,39 @@ QMenu::separator {
 #LoadToDeckBButton {
     background-color: #1a1a1a;
     color: #888888;
-    border: 2px solid #2a2a2a;
-    border-radius: 4px;
+    border: none;
+    border-radius: 0px;
     font-size: 12px;
     font-weight: bold;
     padding: 8px 16px;
 }
 
+#LoadToDeckAButton {
+    border-left: 3px solid #FF0000;
+}
+
+#LoadToDeckBButton {
+    border-left: 3px solid #0000FF;
+}
+
 #LoadToDeckAButton:hover {
     background-color: #2a2a2a;
-    color: #4080FF;
-    border-color: #4080FF;
+    color: #FF0000;
 }
 
 #LoadToDeckBButton:hover {
     background-color: #2a2a2a;
-    color: #FF4080;
-    border-color: #FF4080;
+    color: #0000FF;
 }
 
 #LoadToDeckAButton:pressed {
-    background-color: #4080FF;
+    background-color: #FF0000;
     color: #ffffff;
-    border-color: #4080FF;
 }
 
 #LoadToDeckBButton:pressed {
-    background-color: #FF4080;
+    background-color: #0000FF;
     color: #ffffff;
-    border-color: #FF4080;
 }
 
 /* Library Widget */
@@ -568,6 +590,15 @@ QTreeView::branch:selected {
 #DeckBRow,
 #CrossfaderSection {
     background-color: #000000;
+}
+
+/* Deck Color Accents */
+#DeckAccentA {
+    background-color: #FF0000;
+}
+
+#DeckAccentB {
+    background-color: #0000FF;
 }
 
 #DeckAControls,
