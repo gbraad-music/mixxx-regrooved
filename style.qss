@@ -260,9 +260,9 @@ QMenu::separator {
 #PlayButtonDeck2,
 #PlayButtonDeck1Small,
 #PlayButtonDeck2Small {
-    background-color: #AA0000;
+    background-color: #DD0000;
     color: #ffffff;
-    border: 2px solid #DD0000;
+    border: 2px solid #AA0000;
     border-radius: 4px;
     font-size: 16px;
     font-weight: bold;
@@ -273,25 +273,25 @@ QMenu::separator {
 #PlayButtonDeck2:hover,
 #PlayButtonDeck1Small:hover,
 #PlayButtonDeck2Small:hover {
-    background-color: #CC0000;
-    border-color: #FF0000;
+    background-color: #FF0000;
+    border-color: #CC0000;
 }
 
 #PlayButtonDeck1:pressed,
 #PlayButtonDeck2:pressed,
 #PlayButtonDeck1Small:pressed,
 #PlayButtonDeck2Small:pressed {
-    background-color: #880000;
-    border-color: #990000;
+    background-color: #990000;
+    border-color: #880000;
 }
 
 #PlayButtonDeck1[value="1"],
 #PlayButtonDeck2[value="1"],
 #PlayButtonDeck1Small[value="1"],
 #PlayButtonDeck2Small[value="1"] {
-    background-color: #00FF00;
+    background-color: #44FF44;
     color: #000000;
-    border-color: #44FF44;
+    border-color: #00DD00;
 }
 
 /* Smaller font for small play buttons in extended grid */
@@ -300,13 +300,82 @@ QMenu::separator {
     font-size: 12px;
 }
 
+/* Mute Buttons - Grey when not muted, RED when muted */
+#MuteButtonDeck1,
+#MuteButtonDeck2,
+#MuteButtonDeck1Small,
+#MuteButtonDeck2Small {
+    background-color: #2a2a2a;
+    color: #888888;
+    border: 2px solid #1a1a1a;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 3px;
+}
+
+#MuteButtonDeck1Small,
+#MuteButtonDeck2Small {
+    font-size: 11px;
+    min-width: 64px;
+    max-width: 64px;
+    min-height: 64px;
+    max-height: 64px;
+}
+
+#MuteButtonDeck1:hover,
+#MuteButtonDeck2:hover,
+#MuteButtonDeck1Small:hover,
+#MuteButtonDeck2Small:hover {
+    background-color: #3a3a3a;
+    color: #aaaaaa;
+}
+
+#MuteButtonDeck1[value="1"],
+#MuteButtonDeck2[value="1"],
+#MuteButtonDeck1Small[value="1"],
+#MuteButtonDeck2Small[value="1"] {
+    background-color: #FF4444;
+    color: #ffffff;
+    border-color: #DD0000;
+}
+
+/* PFL (Headphone Preview) Buttons - Grey when off, GREEN when on */
+#PflButtonDeck1,
+#PflButtonDeck2 {
+    background-color: #2a2a2a;
+    color: #888888;
+    border: 2px solid #1a1a1a;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 3px;
+    min-width: 64px;
+    max-width: 64px;
+    min-height: 64px;
+    max-height: 64px;
+}
+
+#PflButtonDeck1:hover,
+#PflButtonDeck2:hover {
+    background-color: #3a3a3a;
+    color: #aaaaaa;
+}
+
+#PflButtonDeck1[value="1"],
+#PflButtonDeck2[value="1"] {
+    background-color: #00DD00;
+    color: #ffffff;
+    border-color: #00AA00;
+}
+
 
 /* Extended Control Buttons - CUE, SYNC, LOOP */
 #CueButtonDeck1,
 #CueButtonDeck2 {
-    background-color: #CC6600;
+    background-color: #FF8800;
     color: #ffffff;
-    border: 2px solid #FF8800;
+    border: 2px solid #CC6600;
     border-radius: 4px;
     font-size: 11px;
     font-weight: bold;
@@ -319,21 +388,21 @@ QMenu::separator {
 
 #CueButtonDeck1:hover,
 #CueButtonDeck2:hover {
-    background-color: #DD7700;
-    border-color: #FFAA00;
+    background-color: #FFAA00;
+    border-color: #DD7700;
 }
 
 #CueButtonDeck1:pressed,
 #CueButtonDeck2:pressed {
-    background-color: #AA5500;
-    border-color: #CC6600;
+    background-color: #CC6600;
+    border-color: #AA5500;
 }
 
 #SyncButtonDeck1,
 #SyncButtonDeck2 {
-    background-color: #0066CC;
+    background-color: #0088FF;
     color: #ffffff;
-    border: 2px solid #0088FF;
+    border: 2px solid #0066CC;
     border-radius: 4px;
     font-size: 11px;
     font-weight: bold;
@@ -346,22 +415,22 @@ QMenu::separator {
 
 #SyncButtonDeck1:hover,
 #SyncButtonDeck2:hover {
-    background-color: #0077DD;
-    border-color: #00AAFF;
+    background-color: #00AAFF;
+    border-color: #0077DD;
 }
 
 #SyncButtonDeck1[value="1"],
 #SyncButtonDeck2[value="1"] {
-    background-color: #00AAFF;
+    background-color: #44CCFF;
     color: #000000;
-    border-color: #44CCFF;
+    border-color: #00AAFF;
 }
 
 #LoopButtonDeck1,
 #LoopButtonDeck2 {
-    background-color: #CCAA00;
+    background-color: #FFCC00;
     color: #ffffff;
-    border: 2px solid #FFCC00;
+    border: 2px solid #CCAA00;
     border-radius: 4px;
     font-size: 11px;
     font-weight: bold;
@@ -384,15 +453,15 @@ QMenu::separator {
 
 #LoopButtonDeck1:hover,
 #LoopButtonDeck2:hover {
-    background-color: #DDBB00;
-    border-color: #FFDD00;
+    background-color: #FFDD00;
+    border-color: #DDBB00;
 }
 
 #LoopButtonDeck1[value="1"],
 #LoopButtonDeck2[value="1"] {
-    background-color: #FFEE00;
+    background-color: #FFFF44;
     color: #000000;
-    border-color: #FFFF44;
+    border-color: #FFEE00;
 }
 
 /* Library Load Bar */
@@ -588,7 +657,8 @@ QTreeView::branch:selected {
 #Deck2Row,
 #DeckARow,
 #DeckBRow,
-#CrossfaderSection {
+#CrossfaderSection,
+#CrossfaderSectionVertical {
     background-color: #000000;
 }
 
@@ -663,7 +733,7 @@ QTreeView::branch:selected {
 
 /* Crossfader */
 #Crossfader {
-    background-color: #2a2a2a;
+    background-color: #000000;
     border: 1px solid #1a1a1a;
     border-radius: 4px;
 }

@@ -26,10 +26,10 @@
         <SizePolicy>min,me</SizePolicy>
         <Children>
 
-          <!-- Big Play Button (visible when collapsed) -->
+          <!-- Big Play Button + Mute (visible when collapsed) -->
           <WidgetGroup>
+            <Layout>vertical</Layout>
             <SizePolicy>min,min</SizePolicy>
-            <MinimumSize>140,140</MinimumSize>
             <Connection>
               <ConfigKey>[Master],show_extended_controls</ConfigKey>
               <BindProperty>visible</BindProperty>
@@ -53,10 +53,27 @@
                   <ButtonState>LeftButton</ButtonState>
                 </Connection>
               </PushButton>
+              <PushButton>
+                <ObjectName>MuteButtonDeck<Variable name="DeckNum"/></ObjectName>
+                <Size>130,130</Size>
+                <NumberStates>2</NumberStates>
+                <State>
+                  <Number>0</Number>
+                  <Text>MUTE</Text>
+                </State>
+                <State>
+                  <Number>1</Number>
+                  <Text>MUTED</Text>
+                </State>
+                <Connection>
+                  <ConfigKey>[Channel<Variable name="DeckNum"/>],mute</ConfigKey>
+                  <ButtonState>LeftButton</ButtonState>
+                </Connection>
+              </PushButton>
             </Children>
           </WidgetGroup>
 
-          <!-- Small Transport Controls 2x2 Grid (visible when expanded) -->
+          <!-- Small Transport Controls 2x3 Grid (visible when expanded) -->
           <WidgetGroup>
             <Layout>vertical</Layout>
             <SizePolicy>min,me</SizePolicy>
@@ -143,6 +160,47 @@
                     <Connection>
                       <ConfigKey>[Channel<Variable name="DeckNum"/>],beatloop_4_toggle</ConfigKey>
                       <EmitOnPressAndRelease>true</EmitOnPressAndRelease>
+                      <ButtonState>LeftButton</ButtonState>
+                    </Connection>
+                  </PushButton>
+                </Children>
+              </WidgetGroup>
+              <!-- Row 3: MUTE, HEADPHONE -->
+              <WidgetGroup>
+                <Layout>horizontal</Layout>
+                <SizePolicy>min,min</SizePolicy>
+                <Children>
+                  <PushButton>
+                    <ObjectName>MuteButtonDeck<Variable name="DeckNum"/>Small</ObjectName>
+                    <Size>60,60</Size>
+                    <NumberStates>2</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                      <Text>MUTE</Text>
+                    </State>
+                    <State>
+                      <Number>1</Number>
+                      <Text>MUTED</Text>
+                    </State>
+                    <Connection>
+                      <ConfigKey>[Channel<Variable name="DeckNum"/>],mute</ConfigKey>
+                      <ButtonState>LeftButton</ButtonState>
+                    </Connection>
+                  </PushButton>
+                  <PushButton>
+                    <ObjectName>PflButtonDeck<Variable name="DeckNum"/></ObjectName>
+                    <Size>60,60</Size>
+                    <NumberStates>2</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                      <Text>PFL</Text>
+                    </State>
+                    <State>
+                      <Number>1</Number>
+                      <Text>PFL</Text>
+                    </State>
+                    <Connection>
+                      <ConfigKey>[Channel<Variable name="DeckNum"/>],pfl</ConfigKey>
                       <ButtonState>LeftButton</ButtonState>
                     </Connection>
                   </PushButton>
