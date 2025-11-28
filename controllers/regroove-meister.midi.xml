@@ -7,9 +7,9 @@
         </description>
         <forums>https://music.gbraad.nl/meister</forums>
     </info>
-    <controller id="RegrooveMeister" type="MIDI">
+    <controller id="RegrooveMeister">
         <scriptfiles>
-            <file filename="regroove-meister-scripts.js" functionprefix="RegrooveMeister" />
+            <file filename="regroove-meister-scripts.js" functionprefix="RegrooveMeister"/>
         </scriptfiles>
         <controls>
             <control>
@@ -95,11 +95,11 @@
             <control>
                 <group>[Channel1]</group>
                 <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <description>MIDI Learned from 4 messages.</description>
                 <status>0xB0</status>
                 <midino>0x0D</midino>
                 <options>
-                    <switch/>
+                    <normal/>
                 </options>
             </control>
             <control>
@@ -118,6 +118,16 @@
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0xB0</status>
                 <midino>0x0F</midino>
+                <options>
+                    <switch/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>LoadSelectedTrack</key>
+                <description>MIDI Learned from 1 messages.</description>
+                <status>0xB0</status>
+                <midino>0x10</midino>
                 <options>
                     <switch/>
                 </options>
@@ -145,7 +155,7 @@
             <control>
                 <group>[Master]</group>
                 <key>crossfader</key>
-                <description>MIDI Learned from 62 messages.</description>
+                <description>MIDI Learned from 18 messages.</description>
                 <status>0xB0</status>
                 <midino>0x13</midino>
                 <options>
@@ -258,6 +268,16 @@
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0xB0</status>
                 <midino>0x23</midino>
+                <options>
+                    <switch/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>LoadSelectedTrack</key>
+                <description>MIDI Learned from 1 messages.</description>
+                <status>0xB0</status>
+                <midino>0x24</midino>
                 <options>
                     <switch/>
                 </options>
