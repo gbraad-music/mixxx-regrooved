@@ -1,9 +1,9 @@
 <skin>
   <manifest>
     <title>Regrooved</title>
-    <author>gbraad</author>
+    <author>Gerard Braad (me@gbraad.nl)</author>
     <version>1.0.0</version>
-    <description>A minimal skin with compact horizontal deck layout</description>
+    <description>A touch-friendly minimal skin with a compact deck layout. Made for use with htttps://music.gbraad.nl/meister and the DJ Decks scene</description>
     <license>CC BY-SA 4.0</license>
     <attributes>
       <attribute config_key="[App],num_decks">2</attribute>
@@ -20,7 +20,7 @@
 
   <ObjectName>Mixxx</ObjectName>
   <Style src="skin:style.qss"/>
-  <MinimumSize>1000,600</MinimumSize>
+  <MinimumSize>640,480</MinimumSize>
   <SizePolicy>me,me</SizePolicy>
   <Layout>vertical</Layout>
 
