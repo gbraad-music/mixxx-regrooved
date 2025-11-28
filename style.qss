@@ -300,14 +300,14 @@ QMenu::separator {
     font-size: 12px;
 }
 
-/* Mute Buttons - Grey when not muted, RED when muted */
+/* Mute Buttons - RED (same as PLAY stopped state) */
 #MuteButtonDeck1,
 #MuteButtonDeck2,
 #MuteButtonDeck1Small,
 #MuteButtonDeck2Small {
-    background-color: #2a2a2a;
-    color: #888888;
-    border: 2px solid #1a1a1a;
+    background-color: #DD0000;
+    color: #ffffff;
+    border: 2px solid #AA0000;
     border-radius: 4px;
     font-size: 16px;
     font-weight: bold;
@@ -327,8 +327,9 @@ QMenu::separator {
 #MuteButtonDeck2:hover,
 #MuteButtonDeck1Small:hover,
 #MuteButtonDeck2Small:hover {
-    background-color: #3a3a3a;
-    color: #aaaaaa;
+    background-color: #FF0000;
+    color: #ffffff;
+    border-color: #CC0000;
 }
 
 #MuteButtonDeck1[value="1"],

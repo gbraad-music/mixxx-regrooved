@@ -129,6 +129,7 @@
                 <Handle>skin:images/fader_handle.svg</Handle>
                 <Connection>
                   <ConfigKey>[Channel<Variable name="DeckNum"/>],rate</ConfigKey>
+                  <Transform><Invert/></Transform>
                 </Connection>
               </SliderComposed>
             </Children>
