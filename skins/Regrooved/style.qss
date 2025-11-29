@@ -289,9 +289,9 @@ QMenu::separator {
 #PlayButtonDeck2[value="1"],
 #PlayButtonDeck1Small[value="1"],
 #PlayButtonDeck2Small[value="1"] {
-    background-color: #44FF44;
+    background-color: #00DD00;
     color: #000000;
-    border-color: #00DD00;
+    border-color: #00AA00;
 }
 
 /* Smaller font for small play buttons in extended grid */
@@ -374,33 +374,6 @@ QMenu::separator {
 /* Extended Control Buttons - CUE, SYNC, LOOP */
 #CueButtonDeck1,
 #CueButtonDeck2 {
-    background-color: #FF8800;
-    color: #ffffff;
-    border: 2px solid #CC6600;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: bold;
-    margin: 3px;
-    min-width: 64px;
-    max-width: 64px;
-    min-height: 64px;
-    max-height: 64px;
-}
-
-#CueButtonDeck1:hover,
-#CueButtonDeck2:hover {
-    background-color: #FFAA00;
-    border-color: #DD7700;
-}
-
-#CueButtonDeck1:pressed,
-#CueButtonDeck2:pressed {
-    background-color: #CC6600;
-    border-color: #AA5500;
-}
-
-#SyncButtonDeck1,
-#SyncButtonDeck2 {
     background-color: #0088FF;
     color: #ffffff;
     border: 2px solid #0066CC;
@@ -414,18 +387,44 @@ QMenu::separator {
     max-height: 64px;
 }
 
-#SyncButtonDeck1:hover,
-#SyncButtonDeck2:hover {
+#CueButtonDeck1:hover,
+#CueButtonDeck2:hover {
     background-color: #00AAFF;
     border-color: #0077DD;
 }
 
-#SyncButtonDeck1[value="1"],
-#SyncButtonDeck2[value="1"] {
+#CueButtonDeck1:pressed,
+#CueButtonDeck2:pressed {
     background-color: #44CCFF;
     color: #000000;
     border-color: #00AAFF;
 }
+
+#SyncButtonDeck1,
+#SyncButtonDeck2 {
+    background-color: #FF8800;
+    color: #ffffff;
+    border: 2px solid #CC6600;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 3px;
+    min-width: 64px;
+    max-width: 64px;
+    min-height: 64px;
+    max-height: 64px;
+}
+
+#SyncButtonDeck1:hover,
+#SyncButtonDeck2:hover {
+    background-color: #FFAA00;
+    border-color: #DD7700;
+}
+
+#SyncButtonDeck1[value="1"],
+#SyncButtonDeck2[value="1"] {
+    background-color: #CC6600;
+    border-color: #AA5500;}
 
 #LoopButtonDeck1,
 #LoopButtonDeck2 {

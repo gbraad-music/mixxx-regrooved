@@ -83,21 +83,25 @@
               <BindProperty>visible</BindProperty>
             </Connection>
             <Children>
-              <!-- Row 1: CUE, PLAY -->
+              <!-- Row 1: SYNC, PLAY -->
               <WidgetGroup>
                 <Layout>horizontal</Layout>
                 <SizePolicy>min,min</SizePolicy>
                 <Children>
                   <PushButton>
-                    <ObjectName>CueButtonDeck<Variable name="DeckNum"/></ObjectName>
+                    <ObjectName>SyncButtonDeck<Variable name="DeckNum"/></ObjectName>
                     <Size>60,60</Size>
-                    <NumberStates>1</NumberStates>
+                    <NumberStates>2</NumberStates>
                     <State>
                       <Number>0</Number>
-                      <Text>CUE</Text>
+                      <Text>SYNC</Text>
+                    </State>
+                    <State>
+                      <Number>1</Number>
+                      <Text>SYNC</Text>
                     </State>
                     <Connection>
-                      <ConfigKey>[Channel<Variable name="DeckNum"/>],cue_default</ConfigKey>
+                      <ConfigKey>[Channel<Variable name="DeckNum"/>],sync_enabled</ConfigKey>
                       <ButtonState>LeftButton</ButtonState>
                     </Connection>
                   </PushButton>
@@ -120,25 +124,21 @@
                   </PushButton>
                 </Children>
               </WidgetGroup>
-              <!-- Row 2: SYNC, LOOP -->
+              <!-- Row 2: CUE, LOOP -->
               <WidgetGroup>
                 <Layout>horizontal</Layout>
                 <SizePolicy>min,min</SizePolicy>
                 <Children>
                   <PushButton>
-                    <ObjectName>SyncButtonDeck<Variable name="DeckNum"/></ObjectName>
+                    <ObjectName>CueButtonDeck<Variable name="DeckNum"/></ObjectName>
                     <Size>60,60</Size>
-                    <NumberStates>2</NumberStates>
+                    <NumberStates>1</NumberStates>
                     <State>
                       <Number>0</Number>
-                      <Text>SYNC</Text>
-                    </State>
-                    <State>
-                      <Number>1</Number>
-                      <Text>SYNC</Text>
+                      <Text>CUE</Text>
                     </State>
                     <Connection>
-                      <ConfigKey>[Channel<Variable name="DeckNum"/>],sync_enabled</ConfigKey>
+                      <ConfigKey>[Channel<Variable name="DeckNum"/>],cue_default</ConfigKey>
                       <ButtonState>LeftButton</ButtonState>
                     </Connection>
                   </PushButton>
