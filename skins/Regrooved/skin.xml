@@ -6,15 +6,18 @@
     <description>A touch-friendly minimal skin with a compact deck layout. Made for use with htttps://music.gbraad.nl/meister and the DJ Decks scene</description>
     <license>CC BY-SA 4.0</license>
     <attributes>
-      <attribute config_key="[App],num_decks">2</attribute>
+      <attribute config_key="[App],num_decks">4</attribute>
       <attribute config_key="[App],num_samplers">8</attribute>
       <attribute persist="true" config_key="[Tab],current">overview</attribute>
       <attribute persist="true" config_key="[Master],show_extended_controls">0</attribute>
       <attribute persist="true" config_key="[Master],show_single_deck">0</attribute>
       <attribute persist="true" config_key="[Master],horizontal_dual_deck">0</attribute>
+      <attribute persist="true" config_key="[Master],show_four_decks">0</attribute>
       <attribute persist="true" config_key="[Deck],current_deck">1</attribute>
       <attribute config_key="[Deck],show_deck_a">1</attribute>
       <attribute config_key="[Deck],show_deck_b">0</attribute>
+      <attribute config_key="[Deck],show_deck_c">0</attribute>
+      <attribute config_key="[Deck],show_deck_d">0</attribute>
     </attributes>
   </manifest>
 
@@ -44,9 +47,29 @@
 
         <WidgetGroup><SizePolicy>me,min</SizePolicy></WidgetGroup>
 
-        <!-- Single/Dual Deck Toggle -->
+        <!-- Single/Multi Deck Toggle -->
         <PushButton>
           <ObjectName>ToggleDeckModeButton</ObjectName>
+          <Size>100,30</Size>
+          <NumberStates>2</NumberStates>
+          <State>
+            <Number>0</Number>
+            <Text>MULTI DECKS</Text>
+          </State>
+          <State>
+            <Number>1</Number>
+            <Text>SINGLE DECK</Text>
+          </State>
+          <Connection>
+            <ConfigKey>[Master],show_single_deck</ConfigKey>
+            <EmitOnDownPress>true</EmitOnDownPress>
+            <ButtonState>LeftButton</ButtonState>
+          </Connection>
+        </PushButton>
+
+        <!-- 2/4 Decks Toggle -->
+        <PushButton>
+          <ObjectName>Toggle4DecksButton</ObjectName>
           <Size>80,30</Size>
           <NumberStates>2</NumberStates>
           <State>
@@ -55,10 +78,10 @@
           </State>
           <State>
             <Number>1</Number>
-            <Text>1 DECK</Text>
+            <Text>4 DECKS</Text>
           </State>
           <Connection>
-            <ConfigKey>[Master],show_single_deck</ConfigKey>
+            <ConfigKey>[Master],show_four_decks</ConfigKey>
             <EmitOnDownPress>true</EmitOnDownPress>
             <ButtonState>LeftButton</ButtonState>
           </Connection>
@@ -84,18 +107,18 @@
           </Connection>
         </PushButton>
 
-        <!-- Deck A+B Button (visible in dual deck mode) -->
+        <!-- All Decks Button (visible in multi deck mode) -->
         <PushButton>
           <ObjectName>ShowBothDecksButton</ObjectName>
           <Size>90,30</Size>
           <NumberStates>2</NumberStates>
           <State>
             <Number>0</Number>
-            <Text>DECK A+B</Text>
+            <Text>ALL DECKS</Text>
           </State>
           <State>
             <Number>1</Number>
-            <Text>DECK A+B</Text>
+            <Text>ALL DECKS</Text>
           </State>
           <Connection>
             <ConfigKey>[Tab],overview</ConfigKey>
@@ -194,6 +217,70 @@
           </Connection>
           <Connection>
             <ConfigKey>[Master],show_single_deck</ConfigKey>
+            <BindProperty>visible</BindProperty>
+          </Connection>
+        </PushButton>
+
+        <!-- Deck C Button (visible only in single deck mode with 4-deck enabled) -->
+        <PushButton>
+          <ObjectName>ShowDeckCButton</ObjectName>
+          <Size>80,30</Size>
+          <NumberStates>2</NumberStates>
+          <State>
+            <Number>0</Number>
+            <Text>DECK C</Text>
+          </State>
+          <State>
+            <Number>1</Number>
+            <Text>DECK C</Text>
+          </State>
+          <Connection>
+            <ConfigKey>[Deck],current_deck</ConfigKey>
+            <BindProperty>value</BindProperty>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Deck],deck_c</ConfigKey>
+            <EmitOnDownPress>true</EmitOnDownPress>
+            <ButtonState>LeftButton</ButtonState>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Master],show_single_deck</ConfigKey>
+            <BindProperty>visible</BindProperty>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Master],show_four_decks</ConfigKey>
+            <BindProperty>visible</BindProperty>
+          </Connection>
+        </PushButton>
+
+        <!-- Deck D Button (visible only in single deck mode with 4-deck enabled) -->
+        <PushButton>
+          <ObjectName>ShowDeckDButton</ObjectName>
+          <Size>80,30</Size>
+          <NumberStates>2</NumberStates>
+          <State>
+            <Number>0</Number>
+            <Text>DECK D</Text>
+          </State>
+          <State>
+            <Number>1</Number>
+            <Text>DECK D</Text>
+          </State>
+          <Connection>
+            <ConfigKey>[Deck],current_deck</ConfigKey>
+            <BindProperty>value</BindProperty>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Deck],deck_d</ConfigKey>
+            <EmitOnDownPress>true</EmitOnDownPress>
+            <ButtonState>LeftButton</ButtonState>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Master],show_single_deck</ConfigKey>
+            <BindProperty>visible</BindProperty>
+          </Connection>
+          <Connection>
+            <ConfigKey>[Master],show_four_decks</ConfigKey>
             <BindProperty>visible</BindProperty>
           </Connection>
         </PushButton>
@@ -302,6 +389,44 @@
                       <SetVariable name="SignalHighColor">#FF80C0</SetVariable>
                     </Template>
 
+                    <!-- Deck C Row (visible when 4-deck mode enabled) -->
+                    <WidgetGroup>
+                      <SizePolicy>me,me</SizePolicy>
+                      <Layout>vertical</Layout>
+                      <Connection>
+                        <ConfigKey>[Master],show_four_decks</ConfigKey>
+                        <BindProperty>visible</BindProperty>
+                      </Connection>
+                      <Children>
+                        <Template src="skin:deck.xml">
+                          <SetVariable name="DeckNum">3</SetVariable>
+                          <SetVariable name="DeckLetter">C</SetVariable>
+                          <SetVariable name="SignalColor">#00FF00</SetVariable>
+                          <SetVariable name="SignalLowColor">#008000</SetVariable>
+                          <SetVariable name="SignalHighColor">#80FF80</SetVariable>
+                        </Template>
+                      </Children>
+                    </WidgetGroup>
+
+                    <!-- Deck D Row (visible when 4-deck mode enabled) -->
+                    <WidgetGroup>
+                      <SizePolicy>me,me</SizePolicy>
+                      <Layout>vertical</Layout>
+                      <Connection>
+                        <ConfigKey>[Master],show_four_decks</ConfigKey>
+                        <BindProperty>visible</BindProperty>
+                      </Connection>
+                      <Children>
+                        <Template src="skin:deck.xml">
+                          <SetVariable name="DeckNum">4</SetVariable>
+                          <SetVariable name="DeckLetter">D</SetVariable>
+                          <SetVariable name="SignalColor">#FFFF00</SetVariable>
+                          <SetVariable name="SignalLowColor">#808000</SetVariable>
+                          <SetVariable name="SignalHighColor">#FFFF80</SetVariable>
+                        </Template>
+                      </Children>
+                    </WidgetGroup>
+
                   </Children>
                 </WidgetGroup>
 
@@ -361,6 +486,44 @@
                       <SetVariable name="SignalHighColor">#FF80C0</SetVariable>
                     </Template>
 
+                    <!-- Deck C Column (visible when 4-deck mode enabled) -->
+                    <WidgetGroup>
+                      <SizePolicy>me,me</SizePolicy>
+                      <Layout>vertical</Layout>
+                      <Connection>
+                        <ConfigKey>[Master],show_four_decks</ConfigKey>
+                        <BindProperty>visible</BindProperty>
+                      </Connection>
+                      <Children>
+                        <Template src="skin:deck.xml">
+                          <SetVariable name="DeckNum">3</SetVariable>
+                          <SetVariable name="DeckLetter">C</SetVariable>
+                          <SetVariable name="SignalColor">#00FF00</SetVariable>
+                          <SetVariable name="SignalLowColor">#008000</SetVariable>
+                          <SetVariable name="SignalHighColor">#80FF80</SetVariable>
+                        </Template>
+                      </Children>
+                    </WidgetGroup>
+
+                    <!-- Deck D Column (visible when 4-deck mode enabled) -->
+                    <WidgetGroup>
+                      <SizePolicy>me,me</SizePolicy>
+                      <Layout>vertical</Layout>
+                      <Connection>
+                        <ConfigKey>[Master],show_four_decks</ConfigKey>
+                        <BindProperty>visible</BindProperty>
+                      </Connection>
+                      <Children>
+                        <Template src="skin:deck.xml">
+                          <SetVariable name="DeckNum">4</SetVariable>
+                          <SetVariable name="DeckLetter">D</SetVariable>
+                          <SetVariable name="SignalColor">#FFFF00</SetVariable>
+                          <SetVariable name="SignalLowColor">#808000</SetVariable>
+                          <SetVariable name="SignalHighColor">#FFFF80</SetVariable>
+                        </Template>
+                      </Children>
+                    </WidgetGroup>
+
                   </Children>
                 </WidgetGroup>
 
@@ -402,6 +565,36 @@
                       <SetVariable name="SignalColor">#FF4080</SetVariable>
                       <SetVariable name="SignalLowColor">#A00040</SetVariable>
                       <SetVariable name="SignalHighColor">#FF80C0</SetVariable>
+                    </Template>
+                  </Children>
+                </WidgetGroup>
+
+                <!-- Deck C (trigger=[Deck],deck_c) -->
+                <WidgetGroup trigger="[Deck],deck_c">
+                  <Layout>vertical</Layout>
+                  <SizePolicy>me,me</SizePolicy>
+                  <Children>
+                    <Template src="skin:deck.xml">
+                      <SetVariable name="DeckNum">3</SetVariable>
+                      <SetVariable name="DeckLetter">C</SetVariable>
+                      <SetVariable name="SignalColor">#00FF00</SetVariable>
+                      <SetVariable name="SignalLowColor">#008000</SetVariable>
+                      <SetVariable name="SignalHighColor">#80FF80</SetVariable>
+                    </Template>
+                  </Children>
+                </WidgetGroup>
+
+                <!-- Deck D (trigger=[Deck],deck_d) -->
+                <WidgetGroup trigger="[Deck],deck_d">
+                  <Layout>vertical</Layout>
+                  <SizePolicy>me,me</SizePolicy>
+                  <Children>
+                    <Template src="skin:deck.xml">
+                      <SetVariable name="DeckNum">4</SetVariable>
+                      <SetVariable name="DeckLetter">D</SetVariable>
+                      <SetVariable name="SignalColor">#FFFF00</SetVariable>
+                      <SetVariable name="SignalLowColor">#808000</SetVariable>
+                      <SetVariable name="SignalHighColor">#FFFF80</SetVariable>
                     </Template>
                   </Children>
                 </WidgetGroup>
@@ -458,6 +651,42 @@
                   <Connection>
                     <ConfigKey>[Channel2],LoadSelectedTrack</ConfigKey>
                     <ButtonState>LeftButton</ButtonState>
+                  </Connection>
+                </PushButton>
+                <PushButton>
+                  <ObjectName>LoadToDeckCButton</ObjectName>
+                  <MinimumSize>200,50</MinimumSize>
+                  <SizePolicy>me,min</SizePolicy>
+                  <NumberStates>1</NumberStates>
+                  <State>
+                    <Number>0</Number>
+                    <Text>LOAD TO DECK C</Text>
+                  </State>
+                  <Connection>
+                    <ConfigKey>[Channel3],LoadSelectedTrack</ConfigKey>
+                    <ButtonState>LeftButton</ButtonState>
+                  </Connection>
+                  <Connection>
+                    <ConfigKey>[Master],show_four_decks</ConfigKey>
+                    <BindProperty>visible</BindProperty>
+                  </Connection>
+                </PushButton>
+                <PushButton>
+                  <ObjectName>LoadToDeckDButton</ObjectName>
+                  <MinimumSize>200,50</MinimumSize>
+                  <SizePolicy>me,min</SizePolicy>
+                  <NumberStates>1</NumberStates>
+                  <State>
+                    <Number>0</Number>
+                    <Text>LOAD TO DECK D</Text>
+                  </State>
+                  <Connection>
+                    <ConfigKey>[Channel4],LoadSelectedTrack</ConfigKey>
+                    <ButtonState>LeftButton</ButtonState>
+                  </Connection>
+                  <Connection>
+                    <ConfigKey>[Master],show_four_decks</ConfigKey>
+                    <BindProperty>visible</BindProperty>
                   </Connection>
                 </PushButton>
               </Children>

@@ -93,8 +93,9 @@ QMenu::separator {
     border-color: #FFAA00;
 }
 
-/* Deck Mode Toggle Button */
-#ToggleDeckModeButton {
+/* Deck Mode Toggle Buttons */
+#ToggleDeckModeButton,
+#Toggle4DecksButton {
     background-color: #CC6600;
     color: #ffffff;
     border: 1px solid #FF8800;
@@ -105,12 +106,14 @@ QMenu::separator {
     margin: 0px 3px;
 }
 
-#ToggleDeckModeButton:hover {
+#ToggleDeckModeButton:hover,
+#Toggle4DecksButton:hover {
     background-color: #DD7700;
     color: #ffffff;
 }
 
-#ToggleDeckModeButton[value="1"] {
+#ToggleDeckModeButton[value="1"],
+#Toggle4DecksButton[value="1"] {
     background-color: #FF8800;
     color: #ffffff;
     border-color: #FFAA00;
@@ -118,9 +121,13 @@ QMenu::separator {
 
 /* Deck Selector Buttons */
 #ShowBothDecksButton,
+#ShowFourDecksButton,
 #ShowDeckAButton,
 #ShowDeckBButton,
-#ToggleLayoutButton {
+#ShowDeckCButton,
+#ShowDeckDButton,
+#ToggleLayoutButton,
+#Toggle4DeckLayoutButton {
     background-color: #1a1a1a;
     color: #666666;
     border: 1px solid #222222;
@@ -132,9 +139,13 @@ QMenu::separator {
 }
 
 #ShowBothDecksButton:hover,
+#ShowFourDecksButton:hover,
 #ShowDeckAButton:hover,
 #ShowDeckBButton:hover,
-#ToggleLayoutButton:hover {
+#ShowDeckCButton:hover,
+#ShowDeckDButton:hover,
+#ToggleLayoutButton:hover,
+#Toggle4DeckLayoutButton:hover {
     background-color: #2a2a2a;
     color: #888888;
 }
@@ -143,6 +154,12 @@ QMenu::separator {
     background-color: #0066FF;
     color: #ffffff;
     border-color: #0066FF;
+}
+
+#ShowFourDecksButton[value="1"] {
+    background-color: #00CC88;
+    color: #ffffff;
+    border-color: #00FF99;
 }
 
 #ShowDeckAButton[value="1"] {
@@ -157,10 +174,28 @@ QMenu::separator {
     border-color: #0000FF;
 }
 
+#ShowDeckCButton[value="1"] {
+    background-color: #00FF00;
+    color: #000000;
+    border-color: #00FF00;
+}
+
+#ShowDeckDButton[value="1"] {
+    background-color: #FFFF00;
+    color: #000000;
+    border-color: #FFFF00;
+}
+
 #ToggleLayoutButton[value="1"] {
     background-color: #00AA66;
     color: #ffffff;
     border-color: #00DD88;
+}
+
+#Toggle4DeckLayoutButton[value="1"] {
+    background-color: #CC8800;
+    color: #ffffff;
+    border-color: #FFAA00;
 }
 
 /* View Toggle Buttons */
@@ -258,8 +293,12 @@ QMenu::separator {
 /* Play Buttons - RED when stopped, GREEN when playing */
 #PlayButtonDeck1,
 #PlayButtonDeck2,
+#PlayButtonDeck3,
+#PlayButtonDeck4,
 #PlayButtonDeck1Small,
-#PlayButtonDeck2Small {
+#PlayButtonDeck2Small,
+#PlayButtonDeck3Small,
+#PlayButtonDeck4Small {
     background-color: #DD0000;
     color: #ffffff;
     border: 2px solid #AA0000;
@@ -271,24 +310,36 @@ QMenu::separator {
 
 #PlayButtonDeck1:hover,
 #PlayButtonDeck2:hover,
+#PlayButtonDeck3:hover,
+#PlayButtonDeck4:hover,
 #PlayButtonDeck1Small:hover,
-#PlayButtonDeck2Small:hover {
+#PlayButtonDeck2Small:hover,
+#PlayButtonDeck3Small:hover,
+#PlayButtonDeck4Small:hover {
     background-color: #FF0000;
     border-color: #CC0000;
 }
 
 #PlayButtonDeck1:pressed,
 #PlayButtonDeck2:pressed,
+#PlayButtonDeck3:pressed,
+#PlayButtonDeck4:pressed,
 #PlayButtonDeck1Small:pressed,
-#PlayButtonDeck2Small:pressed {
+#PlayButtonDeck2Small:pressed,
+#PlayButtonDeck3Small:pressed,
+#PlayButtonDeck4Small:pressed {
     background-color: #990000;
     border-color: #880000;
 }
 
 #PlayButtonDeck1[value="1"],
 #PlayButtonDeck2[value="1"],
+#PlayButtonDeck3[value="1"],
+#PlayButtonDeck4[value="1"],
 #PlayButtonDeck1Small[value="1"],
-#PlayButtonDeck2Small[value="1"] {
+#PlayButtonDeck2Small[value="1"],
+#PlayButtonDeck3Small[value="1"],
+#PlayButtonDeck4Small[value="1"] {
     background-color: #00DD00;
     color: #000000;
     border-color: #00AA00;
@@ -296,15 +347,21 @@ QMenu::separator {
 
 /* Smaller font for small play buttons in extended grid */
 #PlayButtonDeck1Small,
-#PlayButtonDeck2Small {
+#PlayButtonDeck2Small,
+#PlayButtonDeck3Small,
+#PlayButtonDeck4Small {
     font-size: 12px;
 }
 
 /* Mute Buttons - Grey when not muted, RED when muted */
 #MuteButtonDeck1,
 #MuteButtonDeck2,
+#MuteButtonDeck3,
+#MuteButtonDeck4,
 #MuteButtonDeck1Small,
-#MuteButtonDeck2Small {
+#MuteButtonDeck2Small,
+#MuteButtonDeck3Small,
+#MuteButtonDeck4Small {
     background-color: #2a2a2a;
     color: #888888;
     border: 2px solid #1a1a1a;
@@ -315,7 +372,9 @@ QMenu::separator {
 }
 
 #MuteButtonDeck1Small,
-#MuteButtonDeck2Small {
+#MuteButtonDeck2Small,
+#MuteButtonDeck3Small,
+#MuteButtonDeck4Small {
     font-size: 11px;
     min-width: 64px;
     max-width: 64px;
@@ -325,8 +384,12 @@ QMenu::separator {
 
 #MuteButtonDeck1:hover,
 #MuteButtonDeck2:hover,
+#MuteButtonDeck3:hover,
+#MuteButtonDeck4:hover,
 #MuteButtonDeck1Small:hover,
-#MuteButtonDeck2Small:hover {
+#MuteButtonDeck2Small:hover,
+#MuteButtonDeck3Small:hover,
+#MuteButtonDeck4Small:hover {
     background-color: #3a3a3a;
     color: #aaaaaa;
     border-color: #CC0000;
@@ -334,8 +397,12 @@ QMenu::separator {
 
 #MuteButtonDeck1[value="1"],
 #MuteButtonDeck2[value="1"],
+#MuteButtonDeck3[value="1"],
+#MuteButtonDeck4[value="1"],
 #MuteButtonDeck1Small[value="1"],
-#MuteButtonDeck2Small[value="1"] {
+#MuteButtonDeck2Small[value="1"],
+#MuteButtonDeck3Small[value="1"],
+#MuteButtonDeck4Small[value="1"] {
     background-color: #DD0000;
     color: #ffffff;
     border-color: #DD0000;
@@ -343,7 +410,9 @@ QMenu::separator {
 
 /* PFL (Headphone Preview) Buttons - Grey when off, GREEN when on */
 #PflButtonDeck1,
-#PflButtonDeck2 {
+#PflButtonDeck2,
+#PflButtonDeck3,
+#PflButtonDeck4 {
     background-color: #2a2a2a;
     color: #888888;
     border: 2px solid #1a1a1a;
@@ -358,13 +427,17 @@ QMenu::separator {
 }
 
 #PflButtonDeck1:hover,
-#PflButtonDeck2:hover {
+#PflButtonDeck2:hover,
+#PflButtonDeck3:hover,
+#PflButtonDeck4:hover {
     background-color: #3a3a3a;
     color: #aaaaaa;
 }
 
 #PflButtonDeck1[value="1"],
-#PflButtonDeck2[value="1"] {
+#PflButtonDeck2[value="1"],
+#PflButtonDeck3[value="1"],
+#PflButtonDeck4[value="1"] {
     background-color: #00DD00;
     color: #ffffff;
     border-color: #00AA00;
@@ -373,7 +446,9 @@ QMenu::separator {
 
 /* Extended Control Buttons - CUE, SYNC, LOOP */
 #CueButtonDeck1,
-#CueButtonDeck2 {
+#CueButtonDeck2,
+#CueButtonDeck3,
+#CueButtonDeck4 {
     background-color: #0088FF;
     color: #ffffff;
     border: 2px solid #0066CC;
@@ -388,20 +463,26 @@ QMenu::separator {
 }
 
 #CueButtonDeck1:hover,
-#CueButtonDeck2:hover {
+#CueButtonDeck2:hover,
+#CueButtonDeck3:hover,
+#CueButtonDeck4:hover {
     background-color: #00AAFF;
     border-color: #0077DD;
 }
 
 #CueButtonDeck1:pressed,
-#CueButtonDeck2:pressed {
+#CueButtonDeck2:pressed,
+#CueButtonDeck3:pressed,
+#CueButtonDeck4:pressed {
     background-color: #44CCFF;
     color: #000000;
     border-color: #00AAFF;
 }
 
 #SyncButtonDeck1,
-#SyncButtonDeck2 {
+#SyncButtonDeck2,
+#SyncButtonDeck3,
+#SyncButtonDeck4 {
     background-color: #FF8800;
     color: #ffffff;
     border: 2px solid #CC6600;
@@ -416,18 +497,24 @@ QMenu::separator {
 }
 
 #SyncButtonDeck1:hover,
-#SyncButtonDeck2:hover {
+#SyncButtonDeck2:hover,
+#SyncButtonDeck3:hover,
+#SyncButtonDeck4:hover {
     background-color: #FFAA00;
     border-color: #DD7700;
 }
 
 #SyncButtonDeck1[value="1"],
-#SyncButtonDeck2[value="1"] {
+#SyncButtonDeck2[value="1"],
+#SyncButtonDeck3[value="1"],
+#SyncButtonDeck4[value="1"] {
     background-color: #CC6600;
     border-color: #AA5500;}
 
 #LoopButtonDeck1,
-#LoopButtonDeck2 {
+#LoopButtonDeck2,
+#LoopButtonDeck3,
+#LoopButtonDeck4 {
     background-color: #FFCC00;
     color: #ffffff;
     border: 2px solid #CCAA00;
@@ -443,7 +530,9 @@ QMenu::separator {
 
 /* Small Play buttons in grid */
 #PlayButtonDeck1Small,
-#PlayButtonDeck2Small {
+#PlayButtonDeck2Small,
+#PlayButtonDeck3Small,
+#PlayButtonDeck4Small {
     min-width: 64px;
     max-width: 64px;
     min-height: 64px;
@@ -452,13 +541,17 @@ QMenu::separator {
 }
 
 #LoopButtonDeck1:hover,
-#LoopButtonDeck2:hover {
+#LoopButtonDeck2:hover,
+#LoopButtonDeck3:hover,
+#LoopButtonDeck4:hover {
     background-color: #FFDD00;
     border-color: #DDBB00;
 }
 
 #LoopButtonDeck1[value="1"],
-#LoopButtonDeck2[value="1"] {
+#LoopButtonDeck2[value="1"],
+#LoopButtonDeck3[value="1"],
+#LoopButtonDeck4[value="1"] {
     background-color: #FFFF44;
     color: #000000;
     border-color: #FFEE00;
@@ -472,7 +565,9 @@ QMenu::separator {
 }
 
 #LoadToDeckAButton,
-#LoadToDeckBButton {
+#LoadToDeckBButton,
+#LoadToDeckCButton,
+#LoadToDeckDButton {
     background-color: #1a1a1a;
     color: #888888;
     border: none;
@@ -490,6 +585,14 @@ QMenu::separator {
     border-left: 3px solid #0000FF;
 }
 
+#LoadToDeckCButton {
+    border-left: 3px solid #00FF00;
+}
+
+#LoadToDeckDButton {
+    border-left: 3px solid #FFFF00;
+}
+
 #LoadToDeckAButton:hover {
     background-color: #2a2a2a;
     color: #FF0000;
@@ -500,6 +603,16 @@ QMenu::separator {
     color: #0000FF;
 }
 
+#LoadToDeckCButton:hover {
+    background-color: #2a2a2a;
+    color: #00FF00;
+}
+
+#LoadToDeckDButton:hover {
+    background-color: #2a2a2a;
+    color: #FFFF00;
+}
+
 #LoadToDeckAButton:pressed {
     background-color: #FF0000;
     color: #ffffff;
@@ -508,6 +621,16 @@ QMenu::separator {
 #LoadToDeckBButton:pressed {
     background-color: #0000FF;
     color: #ffffff;
+}
+
+#LoadToDeckCButton:pressed {
+    background-color: #00FF00;
+    color: #000000;
+}
+
+#LoadToDeckDButton:pressed {
+    background-color: #FFFF00;
+    color: #000000;
 }
 
 /* Library Widget */
@@ -655,8 +778,12 @@ QTreeView::branch:selected {
 /* Deck Rows */
 #Deck1Row,
 #Deck2Row,
+#Deck3Row,
+#Deck4Row,
 #DeckARow,
 #DeckBRow,
+#DeckCRow,
+#DeckDRow,
 #CrossfaderSection,
 #CrossfaderSectionVertical {
     background-color: #000000;
@@ -671,18 +798,40 @@ QTreeView::branch:selected {
     background-color: #0000FF;
 }
 
+#DeckAccentC {
+    background-color: #00FF00;
+}
+
+#DeckAccentD {
+    background-color: #FFFF00;
+}
+
+#DeckAccentC {
+    background-color: #00FF00;
+}
+
+#DeckAccentD {
+    background-color: #FFFF00;
+}
+
 #DeckAControls,
-#DeckBControls {
+#DeckBControls,
+#DeckCControls,
+#DeckDControls {
     background-color: #000000;
 }
 
 #Deck1MixerControls,
-#Deck2MixerControls {
+#Deck2MixerControls,
+#Deck3MixerControls,
+#Deck4MixerControls {
     background-color: #000000;
 }
 
 #Deck1WaveformContainer,
-#Deck2WaveformContainer {
+#Deck2WaveformContainer,
+#Deck3WaveformContainer,
+#Deck4WaveformContainer {
     background-color: #000000;
     border: none;
 }
@@ -724,8 +873,12 @@ QTreeView::branch:selected {
 /* Vertical Faders */
 #VolumeFaderDeck1,
 #VolumeFaderDeck2,
+#VolumeFaderDeck3,
+#VolumeFaderDeck4,
 #TempoFaderDeck1,
-#TempoFaderDeck2 {
+#TempoFaderDeck2,
+#TempoFaderDeck3,
+#TempoFaderDeck4 {
     background-color: #2a2a2a;
     border: 1px solid #1a1a1a;
     border-radius: 4px;
