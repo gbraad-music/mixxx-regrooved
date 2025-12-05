@@ -13,6 +13,14 @@
         </scriptfiles>
         <controls>
             <control>
+                <status>0xF0</status>
+                <group>[Master]</group>
+                <key>incomingData</key>
+                <options>
+                     <script-binding/>
+                </options>
+            </control>
+            <control>
                 <group>[Channel1]</group>
                 <key>hotcue_1_activate</key>
                 <description>MIDI Learned from 1 messages.</description>
