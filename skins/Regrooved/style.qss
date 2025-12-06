@@ -1,15 +1,27 @@
 /* Regrooved Skin Stylesheet - Pure Black Theme */
 
+QMainWindow {
+    background-color: black;
+}
+
+#Mixxx {
+    background-color: black;
+}
+
 /* Main Container */
 #MainContainer {
     background-color: #000000;
     color: #ffffff;
 }
 
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
 /* Menu Bar */
-QMenuBar {
-    background-color: #1a1a1a;
-    color: #888888;
+QMenuBar, QMenuBar::item, QMenu, QMenu::item {
+    background-color: black;
+    color: gray;
     border: none;
     padding: 2px;
 }

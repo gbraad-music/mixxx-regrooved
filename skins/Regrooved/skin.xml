@@ -23,6 +23,25 @@
   <MinimumSize>640,480</MinimumSize>
   <SizePolicy>me,me</SizePolicy>
   <Layout>vertical</Layout>
+  <LaunchImageStyle>
+     QLabel {
+        image: url(skin:images/logo.png);
+        margin-bottom: 12px;
+        min-width: 634px;
+        max-width: 634px;
+        min-height: 120px;
+        max-height: 120px;
+     }
+
+     QProgressBar {
+        background-color: #000000;
+        max-height: 4px;
+      }
+
+     QProgressBar::chunk {
+        background-color: #CF1A37;
+     }
+  </LaunchImageStyle>
 
   <Children>
 
