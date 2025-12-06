@@ -149,10 +149,13 @@ RegrooveMeister.incomingData = function(data, length) {
 };
 
 // Send deck state for all 4 decks (DECKS_STATE_RESPONSE 0x67)
+// Message format: F0 7D <dev> 67 <52 bytes deck state> <4 bytes master> F7
+// Total: 61 bytes (4 header + 52 deck data + 4 master + 1 end)
+// Each deck: 13 bytes (flags, fx, bpm_msb, bpm_lsb, bpm_frac, volume, pos_msb, pos_lsb, rate, duration, eq_high, eq_mid, eq_low)
 RegrooveMeister.sendDeckState = function() {
     var msg = [0xF0, 0x7D, RegrooveMeister.deviceSettings.deviceId, 0x67];
 
-    // Build deck state for all 4 decks
+    // Build deck state for all 4 decks (13 bytes each)
     for (var i = 1; i <= 4; i++) {
         var channel = "[Channel" + i + "]";
 
@@ -162,13 +165,26 @@ RegrooveMeister.sendDeckState = function() {
         if (engine.getValue(channel, "loop_enabled")) flags |= 0x02;      // Bit 1: Looping
         if (engine.getValue(channel, "sync_enabled")) flags |= 0x04;      // Bit 2: Sync
         if (engine.getValue(channel, "cue_indicator")) flags |= 0x08;     // Bit 3: Cue
+        if (engine.getValue(channel, "pfl")) flags |= 0x10;               // Bit 4: PFL (headphone cue)
+        if (engine.getValue(channel, "mute")) flags |= 0x20;              // Bit 5: Mute
         msg.push(flags);
 
-        // BPM (split into integer and fractional parts)
+        // FX byte (4 effect units, bits 0-3)
+        var fx = 0;
+        if (engine.getValue("[EffectRack1_EffectUnit1]", "group_" + channel + "_enable")) fx |= 0x01; // Bit 0: FX Unit 1
+        if (engine.getValue("[EffectRack1_EffectUnit2]", "group_" + channel + "_enable")) fx |= 0x02; // Bit 1: FX Unit 2
+        if (engine.getValue("[EffectRack1_EffectUnit3]", "group_" + channel + "_enable")) fx |= 0x04; // Bit 2: FX Unit 3
+        if (engine.getValue("[EffectRack1_EffectUnit4]", "group_" + channel + "_enable")) fx |= 0x08; // Bit 3: FX Unit 4
+        msg.push(fx);
+
+        // BPM (split into MSB, LSB, fractional parts - 3 bytes total for 0-16383.99 BPM)
         var bpm = engine.getValue(channel, "bpm") || 0;
         var bpmInt = Math.floor(bpm);
         var bpmFrac = Math.round((bpm - bpmInt) * 100);
-        msg.push(bpmInt & 0x7F);
+        var bpmMsb = (bpmInt >> 7) & 0x7F;  // High 7 bits
+        var bpmLsb = bpmInt & 0x7F;          // Low 7 bits
+        msg.push(bpmMsb);
+        msg.push(bpmLsb);
         msg.push(bpmFrac & 0x7F);
 
         // Volume (0-127) - use getParameter to get linear fader position (not curved value)
