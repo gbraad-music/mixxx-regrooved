@@ -161,6 +161,26 @@
                 </options>
             </control>
             <control>
+                <group>[Channel1]</group>
+                <key>mute</key>
+                <description>Channel 1 Mute Toggle</description>
+                <status>0xB0</status>
+                <midino>0x25</midino>
+                <options>
+                    <switch/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>mute</key>
+                <description>Channel 2 Mute Toggle</description>
+                <status>0xB0</status>
+                <midino>0x26</midino>
+                <options>
+                    <switch/>
+                </options>
+            </control>
+            <control>
                 <group>[Master]</group>
                 <key>crossfader</key>
                 <description>MIDI Learned from 18 messages.</description>
@@ -388,6 +408,66 @@
                 <midino>0x31</midino>
                 <options>
                     <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel3]</group>
+                <key>volume</key>
+                <description>Channel 3 Volume</description>
+                <status>0xB0</status>
+                <midino>0x40</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel3]</group>
+                <key>mute</key>
+                <description>Channel 3 Mute Toggle</description>
+                <status>0xB0</status>
+                <midino>0x54</midino>
+                <options>
+                    <switch/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel4]</group>
+                <key>volume</key>
+                <description>Channel 4 Volume</description>
+                <status>0xB0</status>
+                <midino>0x41</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel4]</group>
+                <key>mute</key>
+                <description>Channel 4 Mute Toggle</description>
+                <status>0xB0</status>
+                <midino>0x55</midino>
+                <options>
+                    <switch/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel3]</group>
+                <key>play</key>
+                <description>Channel 3 Play Toggle</description>
+                <status>0xB0</status>
+                <midino>0x35</midino>
+                <options>
+                    <switch/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel4]</group>
+                <key>play</key>
+                <description>Channel 4 Play Toggle</description>
+                <status>0xB0</status>
+                <midino>0x49</midino>
+                <options>
+                    <switch/>
                 </options>
             </control>
         </controls>
